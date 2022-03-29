@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Card, Spinner } from "react-bootstrap";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Pagination } from "swiper";
-import Fade from "react-reveal/Fade";
-import Testimonial from "./Testimonial.js";
-import toast from "react-hot-toast";
-import "./../assets/css/Testimonials.css";
+import React, { useEffect, useState } from 'react';
+import { Card, Spinner } from 'react-bootstrap';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import Fade from 'react-reveal/Fade';
+import Testimonial from './Testimonial.js';
+import toast from 'react-hot-toast';
+import './../assets/css/Testimonials.css';
 
 const Testimonials = () => {
   SwiperCore.use([Pagination, Autoplay]);
   const [loading, setLoading] = useState(true);
   const [Reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("https://fast-sands-24865.herokuapp.com/reviews")
+    fetch('https://fast-sands-24865.herokuapp.com/reviews')
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -23,22 +23,22 @@ const Testimonials = () => {
 
   return (
     <section
-      id="reviews"
-      style={{ overflow: "hidden" }}
-      className="testimonials p-md-3"
+      id='reviews'
+      style={{ overflow: 'hidden' }}
+      className='testimonials p-md-3'
     >
-      <Fade bottom duration={2500} distance="40px">
-        <div className="my-5 py-4">
-          <div className="review-title text-center">
+      <Fade bottom duration={2500} distance='40px'>
+        <div className='my-5 py-4'>
+          <div className='review-title text-center'>
             <span>What Our Customer Says</span>
             <h2>Reviews</h2>
           </div>
           {loading ? (
-            <div className="text-center">
-              <Spinner animation="border" variant="danger" />
+            <div className='text-center'>
+              <Spinner animation='border' variant='danger' />
             </div>
           ) : (
-            <Card className="mt-5">
+            <Card className='mt-5'>
               <Swiper
                 loop={true}
                 slidesPerView={1}

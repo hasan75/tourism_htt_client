@@ -1,48 +1,48 @@
-import React from "react";
-import contactNow from "../assets/images/contact.png";
-import { Col, Container, Row } from "react-bootstrap";
-import "../assets/css/footer.css";
-import Zoom from "react-reveal/Zoom";
+import React from 'react';
+import contactNow from '../assets/images/contact.png';
+import { Col, Container, Row } from 'react-bootstrap';
+import '../assets/css/footer.css';
+import Zoom from 'react-reveal/Zoom';
 
 const Footer = () => {
   return (
     <>
-      <div className="footer-top pb-4">
+      <div className='footer-top pb-4'>
         <Container>
           <Row>
             <Col sm={12} md={6} lg={3}>
               <Zoom>
-                <h4 className="col-title">Want to get updates?</h4>
-                <h5 className="text-muted">Sign up for our Newsletter</h5>
-                <form className="d-flex">
+                <h4 className='col-title'>Want to get updates?</h4>
+                <h5 className='text-muted'>Sign up for our Newsletter</h5>
+                <form className='d-flex'>
                   <input
-                    placeholder="Enter your email"
-                    className="form-control rounded-0"
-                    type="text"
+                    placeholder='Enter your email'
+                    className='form-control rounded-0'
+                    type='text'
                   />
-                  <button className="btn rounded-0 btn-primary">Subs</button>
+                  <button className='btn rounded-0 btn-primary'>Subs</button>
                 </form>
-                <h5 className="text-muted mt-4">Follow us on</h5>
+                <h5 className='text-muted mt-4'>Follow us on</h5>
                 <div>
-                  <ul className="social-icons">
+                  <ul className='social-icons'>
                     <li>
-                      <a href="/d">
-                        <i class="fab fa-youtube"></i>
+                      <a href='/home'>
+                        <i className='fab fa-youtube'></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/d">
-                        <i class="fab fa-facebook-square"></i>
+                      <a href='/home'>
+                        <i className='fab fa-facebook-square'></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/d">
-                        <i class="fab fa-instagram"></i>
+                      <a href='/home'>
+                        <i className='fab fa-instagram'></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/d">
-                        <i class="fab fa-twitter-square"></i>
+                      <a href='/home'>
+                        <i className='fab fa-twitter-square'></i>
                       </a>
                     </li>
                   </ul>
@@ -51,25 +51,25 @@ const Footer = () => {
             </Col>
             <Col sm={12} md={6} lg={3}>
               <Zoom>
-                <h4 className="col-title">INFORMATION</h4>
-                <ul className="information">
+                <h4 className='col-title'>INFORMATION</h4>
+                <ul className='information'>
                   <li>
-                    <a href="/home">Online Payments</a>
+                    <a href='/home'>Online Payments</a>
                   </li>
                   <li>
-                    <a href="/home">TERMS & CONDITIONS</a>
+                    <a href='/home'>TERMS & CONDITIONS</a>
                   </li>
                   <li>
-                    <a href="/home">Pran-RFL</a>
+                    <a href='/home'>Hit The Trail</a>
                   </li>
                   <li>
-                    <a href="/home">Career</a>
+                    <a href='/home'>Career</a>
                   </li>
                   <li>
-                    <a href="/home">Privacy Policy</a>
+                    <a href='/home'>Privacy Policy</a>
                   </li>
                   <li>
-                    <a href="/home">Refund Policy</a>
+                    <a href='/home'>Refund Policy</a>
                   </li>
                 </ul>
               </Zoom>
@@ -77,46 +77,46 @@ const Footer = () => {
 
             <Col sm={12} md={6} lg={3}>
               <Zoom>
-                <h4 className="col-title">CUSTOMER SERVICE</h4>
-                <ul className="information">
+                <h4 className='col-title'>CUSTOMER SERVICE</h4>
+                <ul className='information'>
                   <li>
-                    <a href="/home">FAQs</a>
+                    <a href='/home'>FAQs</a>
                   </li>
                   <li>
-                    <a href="/home">MyPran</a>
+                    <a href='/home'>MyHTT</a>
                   </li>
                   <li>
-                    <a href="/home">Store Locator</a>
+                    <a href='/home'>Store Locator</a>
                   </li>
                   <li>
-                    <a href="/home">All About Pran-RFL</a>
+                    <a href='/home'>All About HTT</a>
                   </li>
                   <li>
-                    <a href="/home">Contact Info</a>
+                    <a href='/home'>Contact Info</a>
                   </li>
                   <li>
-                    <a href="/home">Delivery</a>
+                    <a href='/services'>Packages</a>
                   </li>
                 </ul>
               </Zoom>
             </Col>
             <Col sm={12} md={6} lg={3}>
               <Zoom>
-                <h4 className="col-title">Reach us</h4>
-                <div className="">
-                  <img width="100px" src={contactNow} alt="" />
+                <h4 className='col-title'>Reach us</h4>
+                <div className=''>
+                  <img width='100px' src={contactNow} alt='' />
                 </div>
-                <ul className="information contact-info">
+                <ul className='information contact-info'>
                   <li>
-                    <i className="fas fa-map-marker-alt"></i>
+                    <i className='fas fa-map-marker-alt'></i>
                     Uttara, Dhaka, Bangladesh
                   </li>
                   <li>
-                    <i className="fas fa-envelope"></i>
-                    Email: info@pran-rfl.bd
+                    <i className='fas fa-envelope'></i>
+                    Email: info@htt.bd
                   </li>
                   <li>
-                    <i className="fas fa-phone"></i>
+                    <i className='fas fa-phone'></i>
                     Helpline: +8801761395574
                   </li>
                 </ul>
@@ -125,8 +125,11 @@ const Footer = () => {
           </Row>
         </Container>
       </div>
-      <div className="footer">
-        <p className="text-center"> <span className="text-warning fw-bold"> &copy; Hasan Ahmed || Programming Hero 2021</span></p>
+      <div className='footer'>
+        <p className='text-center'>
+          {' '}
+          <span className='text-warning fw-bold'> &copy; Hit the Trail</span>
+        </p>
       </div>
     </>
   );
