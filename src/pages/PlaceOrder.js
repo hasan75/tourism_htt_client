@@ -1,10 +1,10 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
-import { useHistory, useParams } from "react-router";
-import { useForm } from "react-hook-form";
-import useContexts from "../hooks/useContexts.js";
-import Swal from "sweetalert2";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
+import { useHistory, useParams } from 'react-router';
+import { useForm } from 'react-hook-form';
+import useContexts from '../hooks/useContexts.js';
+import Swal from 'sweetalert2';
 
 const PlaceOrder = () => {
   const history = useHistory();
@@ -12,7 +12,7 @@ const PlaceOrder = () => {
   const [product, setProduct] = useState({});
   const { displayName, email } = useContexts();
   useEffect(() => {
-    fetch(`https://fast-sands-24865.herokuapp.com/placeorder/${id}`)
+    fetch(`http://localhost:5000/placeorder/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [id]);
@@ -20,23 +20,23 @@ const PlaceOrder = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     Swal.fire({
-      icon: "warning",
-      title: "Do you want to confirm your order?",
+      icon: 'warning',
+      title: 'Do you want to confirm your order?',
       showCancelButton: true,
-      confirmButtonText: "Yes",
+      confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("https://fast-sands-24865.herokuapp.com/placeorder", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
+        fetch('http://localhost:5000/placeorder', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ ...data, ...product }),
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.insertedId) {
               reset();
-              Swal.fire("Confirmed!", "", "success");
-              history.replace("/dashboard/myorder");
+              Swal.fire('Confirmed!', '', 'success');
+              history.replace('/dashboard/myorder');
             }
           });
       }
@@ -46,89 +46,89 @@ const PlaceOrder = () => {
   return (
     <>
       {!product.title ? (
-        <div className="text-center my-5 private-spinner py-5">
-          <Spinner variant="danger" animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
+        <div className='text-center my-5 private-spinner py-5'>
+          <Spinner variant='danger' animation='border' role='status'>
+            <span className='visually-hidden'>Loading...</span>
           </Spinner>
           <h6>Loading...</h6>
         </div>
       ) : (
         <Container>
-          <Row className="align-items-center">
-            <Col sm={12} style={{ borderRight: "1px solid #ddd" }} md={6}>
-              <img width="100%" src={product.img} alt="" />
+          <Row className='align-items-center'>
+            <Col sm={12} style={{ borderRight: '1px solid #ddd' }} md={6}>
+              <img width='100%' src={product.img} alt='' />
             </Col>
-            <Col className="my-4" sm={12} md={6}>
-              <h2 className="text-center feature">Please confirm order</h2>
-              <div className="mt-5">
+            <Col className='my-4' sm={12} md={6}>
+              <h2 className='text-center feature'>Please confirm order</h2>
+              <div className='mt-5'>
                 <h4>{product.desc}</h4>
-                <h3 className="mt-3">Price: {product.price}.00TK</h3>
+                <h3 className='mt-3'>Price: {product.price}.00TK</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Row className="mt-3">
+                  <Row className='mt-3'>
                     <Col sm={12} md={6}>
-                      <label htmlFor="name">
+                      <label htmlFor='name'>
                         <b>Name</b>
                       </label>
                       <input
-                        id="name"
+                        id='name'
                         required
-                        type="text"
-                        className="form-control"
-                        {...register("name")}
+                        type='text'
+                        className='form-control'
+                        {...register('name')}
                         defaultValue={displayName}
-                        placeholder="your name"
+                        placeholder='your name'
                       />
                     </Col>
                     <Col sm={12} md={6}>
-                      <label htmlFor="email">
+                      <label htmlFor='email'>
                         <b>Email</b>
                       </label>
                       <input
-                        id="email"
+                        id='email'
                         required
-                        type="email"
+                        type='email'
                         readOnly
                         defaultValue={email}
-                        className="form-control"
-                        {...register("email")}
-                        placeholder="your email"
+                        className='form-control'
+                        {...register('email')}
+                        placeholder='your email'
                       />
                     </Col>
                   </Row>
-                  <Row className="my-4">
+                  <Row className='my-4'>
                     <Col>
-                      <label htmlFor="address">
+                      <label htmlFor='address'>
                         <b>Address</b>
                       </label>
                       <input
-                        id="address"
+                        id='address'
                         required
-                        type="text"
-                        className="form-control"
-                        {...register("address")}
-                        placeholder="Enter your address"
+                        type='text'
+                        className='form-control'
+                        {...register('address')}
+                        placeholder='Enter your address'
                       />
                     </Col>
                   </Row>
-                  <Row className="my-4">
+                  <Row className='my-4'>
                     <Col>
-                      <label htmlFor="phone">
+                      <label htmlFor='phone'>
                         <b>Phone</b>
                       </label>
                       <input
-                        id="phone"
+                        id='phone'
                         required
-                        type="number"
-                        className="form-control"
-                        {...register("phone")}
-                        placeholder="Enter your phone"
+                        type='number'
+                        className='form-control'
+                        {...register('phone')}
+                        placeholder='Enter your phone'
                       />
                     </Col>
                   </Row>
                   <input
-                    value="Order Now"
-                    className="btn btn-primary"
-                    type="submit"
+                    value='Order Now'
+                    className='btn btn-primary'
+                    type='submit'
                   />
                 </form>
               </div>

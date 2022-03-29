@@ -1,4 +1,4 @@
-import firebaseInIt from "../firebase/firebase.init";
+import firebaseInIt from '../firebase/firebase.init';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,9 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-} from "firebase/auth";
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+} from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 firebaseInIt();
 const auth = getAuth();
 
@@ -25,21 +25,21 @@ const useFirebase = () => {
         setUserName(name);
         addUserToDB(name, email);
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Successfully Registered",
-          text: "Welcome to Pran RFL",
+          position: 'center',
+          icon: 'success',
+          title: 'Successfully Registered',
+          text: 'Welcome to Pran RFL',
           showConfirmButton: false,
           timer: 2000,
         });
         setUser(result.user);
-        history.replace("/");
+        history.replace('/');
       })
       .catch((err) => {
         Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Oops..",
+          position: 'center',
+          icon: 'error',
+          title: 'Oops..',
           text: `${err.message}`,
           showConfirmButton: false,
           timer: 2000,
@@ -49,9 +49,9 @@ const useFirebase = () => {
   }
   // add user to db
   function addUserToDB(name, email) {
-    fetch("https://fast-sands-24865.herokuapp.com/users", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name, email }),
     })
       .then((res) => res.json())
@@ -87,10 +87,10 @@ const useFirebase = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Successfully Logged in!!",
-          text: "Welcome Back to PRAN RFL",
+          position: 'center',
+          icon: 'success',
+          title: 'Successfully Logged in!!',
+          text: 'Welcome Back to PRAN RFL',
           showConfirmButton: false,
           timer: 2000,
         });
@@ -99,9 +99,9 @@ const useFirebase = () => {
       })
       .catch((err) => {
         Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Oops..",
+          position: 'center',
+          icon: 'error',
+          title: 'Oops..',
           text: `${err.message}`,
           showConfirmButton: false,
           timer: 2000,
@@ -116,10 +116,10 @@ const useFirebase = () => {
     signOut(auth)
       .then(() => {
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Successfully Logged out!",
-          text: "See You Soon",
+          position: 'center',
+          icon: 'success',
+          title: 'Successfully Logged out!',
+          text: 'See You Soon',
           showConfirmButton: false,
           timer: 2000,
         });
@@ -127,9 +127,9 @@ const useFirebase = () => {
       })
       .catch((err) => {
         Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Oops..",
+          position: 'center',
+          icon: 'error',
+          title: 'Oops..',
           text: `${err.message}`,
           showConfirmButton: false,
           timer: 2000,

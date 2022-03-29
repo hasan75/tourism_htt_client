@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const useProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("https://fast-sands-24865.herokuapp.com/products")
+    fetch('http://localhost:5000/products')
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
       })
       .catch((err) => {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-          footer: "Please, try again",
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: 'Please, try again',
         });
       });
   }, []);

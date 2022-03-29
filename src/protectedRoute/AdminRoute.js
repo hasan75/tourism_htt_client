@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
-import { Route, Redirect } from "react-router-dom";
-import useContexts from "../hooks/useContexts.js";
+import { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import { Route, Redirect } from 'react-router-dom';
+import useContexts from '../hooks/useContexts.js';
 
 function AdminRoute(props) {
   const { children, ...rest } = props;
@@ -9,7 +9,7 @@ function AdminRoute(props) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(`https://fast-sands-24865.herokuapp.com/admin/${email}`)
+    fetch(`http://localhost:5000/admin/${email}`)
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
@@ -19,9 +19,9 @@ function AdminRoute(props) {
   }, [email]);
   if (loading) {
     return (
-      <div className="text-center my-5 private-spinner py-5">
-        <Spinner variant="danger" animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
+      <div className='text-center my-5 private-spinner py-5'>
+        <Spinner variant='danger' animation='border' role='status'>
+          <span className='visually-hidden'>Loading...</span>
         </Spinner>
         <h6>Loading...</h6>
       </div>
@@ -32,12 +32,12 @@ function AdminRoute(props) {
     <Route
       {...rest}
       render={({ location }) =>
-        user?.role === "admin" ? (
+        user?.role === 'admin' ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: "/home",
+              pathname: '/home',
               state: { from: location },
             }}
           />

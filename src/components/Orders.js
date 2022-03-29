@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Spinner, Table, Button } from "react-bootstrap";
-import toast, { Toaster } from "react-hot-toast";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import { Spinner, Table, Button } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -9,7 +9,7 @@ const Orders = () => {
   console.log(orders);
 
   useEffect(() => {
-    fetch(`https://fast-sands-24865.herokuapp.com/orders`)
+    fetch(`http://localhost:5000/orders`)
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -29,17 +29,17 @@ const Orders = () => {
     setOrders(modifiedOrders);
     const modifiedStatus = { id, status };
 
-    fetch("https://fast-sands-24865.herokuapp.com/updateOrderStatus", {
-      method: "put",
-      headers: { "content-type": "application/json" },
+    fetch('http://localhost:5000/updateOrderStatus', {
+      method: 'put',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(modifiedStatus),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          toast.success(<b style={{ color: "#198754" }}>Set to {status}</b>);
+          toast.success(<b style={{ color: '#198754' }}>Set to {status}</b>);
         } else {
-          toast.error("something went wrong!");
+          toast.error('something went wrong!');
         }
       })
       .catch((error) => toast.error(error.message));
@@ -47,20 +47,20 @@ const Orders = () => {
 
   const deletion = (id) => {
     Swal.fire({
-      title: "Are you sure to delete this order?",
+      title: 'Are you sure to delete this order?',
       showCancelButton: true,
-      confirmButtonText: "Yes",
+      confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://fast-sands-24865.herokuapp.com/placeorder/${id}`, {
-          method: "DELETE",
+        fetch(`http://localhost:5000/placeorder/${id}`, {
+          method: 'DELETE',
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {
               const modifiedOrders = orders.filter((order) => order._id !== id);
               setOrders(modifiedOrders);
-              Swal.fire("Deleted!", "", "success");
+              Swal.fire('Deleted!', '', 'success');
             }
           });
       }
@@ -68,19 +68,19 @@ const Orders = () => {
   };
 
   return (
-    <div className="px-2  mx-md-2 bg-white" style={{ borderRadius: "15px" }}>
-      <h3 className="text-center mb-4 fw-bold">Manage all orders</h3>
+    <div className='px-2  mx-md-2 bg-white' style={{ borderRadius: '15px' }}>
+      <h3 className='text-center mb-4 fw-bold'>Manage all orders</h3>
       {loading ? (
-        <div className="text-center my-5 private-spinner py-5">
-          <Spinner variant="danger" animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
+        <div className='text-center my-5 private-spinner py-5'>
+          <Spinner variant='danger' animation='border' role='status'>
+            <span className='visually-hidden'>Loading...</span>
           </Spinner>
           <h6>Loading...</h6>
         </div>
       ) : (
         <Table hover borderless responsive>
-          <Toaster position="bottom-left" reverseOrder={false} />
-          <thead className="bg-light">
+          <Toaster position='bottom-left' reverseOrder={false} />
+          <thead className='bg-light'>
             <tr>
               <th>Name</th>
               <th>Email ID</th>
@@ -93,7 +93,7 @@ const Orders = () => {
           </thead>
           {orders.map((order) => {
             return (
-              <tbody key={order._id} style={{ fontWeight: "500" }}>
+              <tbody key={order._id} style={{ fontWeight: '500' }}>
                 <tr>
                   <td>{order.name}</td>
                   <td>{order.email}</td>
@@ -102,31 +102,31 @@ const Orders = () => {
                   <td title={order.desc}>{order.desc.slice(0, 10)}...</td>
                   <td>
                     <Button
-                      variant="outline-danger"
-                      className="p-1 ml-3 mb-0"
+                      variant='outline-danger'
+                      className='p-1 ml-3 mb-0'
                       onClick={() => deletion(order._id)}
                     >
-                      <i className="fas mx-1 fa-trash"></i>
+                      <i className='fas mx-1 fa-trash'></i>
                       Delete
                     </Button>
                   </td>
                   <td>
                     <select
                       className={
-                        order.status === "Pending"
-                          ? "btn btn-danger"
-                          : order.status === "Done"
-                          ? "btn btn-success"
-                          : "btn btn-info"
+                        order.status === 'Pending'
+                          ? 'btn btn-danger'
+                          : order.status === 'Done'
+                          ? 'btn btn-success'
+                          : 'btn btn-info'
                       }
                       defaultValue={order.status}
                       onChange={(e) =>
                         handleStatusChange(order._id, e.target.value)
                       }
                     >
-                      <option className="bg-white text-muted">Pending</option>
-                      <option className="bg-white text-muted">On going</option>
-                      <option className="bg-white text-muted">Done</option>
+                      <option className='bg-white text-muted'>Pending</option>
+                      <option className='bg-white text-muted'>On going</option>
+                      <option className='bg-white text-muted'>Done</option>
                     </select>
                   </td>
                 </tr>
