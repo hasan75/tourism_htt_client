@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import './assets/css/main.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -14,6 +13,7 @@ import PlaceOrder from './pages/PlaceOrder';
 import Products from './components/Products';
 import PageNotFound from './pages/PageNotFound';
 import ContextProvider from './contexts/ContextProvider';
+import About from './pages/About';
 
 function App() {
   return (
@@ -27,6 +27,9 @@ function App() {
             </Route>
             <Route exact path='/home'>
               <Home></Home>
+            </Route>
+            <Route path='/about'>
+              <About></About>
             </Route>
             <PrivateRoute path='/dashboard'>
               <Dashboard></Dashboard>
