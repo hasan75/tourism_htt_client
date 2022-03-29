@@ -95,7 +95,9 @@ const AddProduct = () => {
                 />
               </Form.Group>
               <Form.Group as={Col} md={6} sm={12}>
-                <Form.Label style={{ fontWeight: 'bold' }}>Discount</Form.Label>
+                <Form.Label style={{ fontWeight: 'bold' }}>
+                  Discount in %
+                </Form.Label>
                 <Form.Control
                   type='discount'
                   {...register('discount', { required: false })}
@@ -167,7 +169,7 @@ const AddProduct = () => {
                 <Form.Control
                   type='time'
                   {...register('return_time', { required: true })}
-                  placeholder='Return Time'
+                  placeholder='Tour Returning Time'
                 />
               </Form.Group>
             </Row>

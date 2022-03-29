@@ -1,0 +1,19 @@
+.cardBody {
+  position: relative;
+}
+.discountContainer {
+  background-color: #9bdaff;
+  height: 15.25rem;
+  width: 8.5rem;
+  clip-path: polygon(0 0, 0 59%, 43% 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.discountContainer .discountText {
+  color: #e92359;
+  position: relative;
+  top: 44px;
+  right: 42px;
+  transform: rotateZ(291deg);
+}

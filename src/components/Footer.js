@@ -95,7 +95,7 @@ const Footer = () => {
                     <a href='/home'>Contact Info</a>
                   </li>
                   <li>
-                    <a href='/services'>Packages</a>
+                    <a href='/products'>Packages</a>
                   </li>
                 </ul>
               </Zoom>

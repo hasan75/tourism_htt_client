@@ -69,7 +69,7 @@ const UpdateProduct = () => {
   return (
     <>
       <section className='add-service'>
-        <h3 className='text-center mb-3'>Add a new product</h3>
+        <h3 className='text-center mb-3'>Update Tour Package</h3>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <div
             className='pb-5 mx-auto  bg-white form-main'
@@ -111,7 +111,9 @@ const UpdateProduct = () => {
                 />
               </Form.Group>
               <Form.Group as={Col} md={6} sm={12}>
-                <Form.Label style={{ fontWeight: 'bold' }}>Discount</Form.Label>
+                <Form.Label style={{ fontWeight: 'bold' }}>
+                  Discount in %
+                </Form.Label>
                 <Form.Control
                   type='number'
                   defaultValue={product.discount}
@@ -153,7 +155,7 @@ const UpdateProduct = () => {
                   type='time'
                   defaultValue={product.start_time}
                   {...register('start_time', { required: true })}
-                  placeholder='Start ime'
+                  placeholder='Start time'
                 />
               </Form.Group>
             </Row>
@@ -184,11 +186,11 @@ const UpdateProduct = () => {
               </Form.Group>
               <Form.Group as={Col} md={4} sm={12} className='mr-md-5'>
                 <Form.Label style={{ fontWeight: 'bold' }}>
-                  Return Time
+                  Returning Time
                 </Form.Label>
                 <Form.Control
                   type='time'
-                  devaultValue={product.return_time}
+                  defaultValue={product.return_time}
                   {...register('return_time', { required: true })}
                   placeholder='Return Time'
                 />

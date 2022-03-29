@@ -14,6 +14,7 @@ import Products from './components/Products';
 import PageNotFound from './pages/PageNotFound';
 import ContextProvider from './contexts/ContextProvider';
 import About from './pages/About';
+import SingleProduct from './pages/SingleProduct';
 
 function App() {
   return (
@@ -40,9 +41,16 @@ function App() {
             <Route path='/register'>
               <Register></Register>
             </Route>
-            <Route path='/products'>
+            <Route exact path='/products'>
               <Products></Products>
             </Route>
+            <PrivateRoute path='/products/:id'>
+              <SingleProduct></SingleProduct>
+            </PrivateRoute>
+
+            {/* <PrivateRoute path='/products/:id'>
+              <SingleProduct></SingleProduct>
+            </PrivateRoute> */}
             <PrivateRoute path='/placeorder/:id'>
               <PlaceOrder></PlaceOrder>
             </PrivateRoute>
