@@ -9,13 +9,6 @@ const firebaseConfig = {
 
 export default firebaseConfig;
 
-//   apiKey: "AIzaSyCXFn1gOhHSs_6OcgUTBhG2vDJ8zUBxoQw",
-//   authDomain: "pran-rfl-react.firebaseapp.com",
-//   projectId: "pran-rfl-react",
-//   storageBucket: "pran-rfl-react.appspot.com",
-//   messagingSenderId: "801830156526",
-//   appId: "1:801830156526:web:0c5b3b675881d9f4739bff"
-
 // apiKey: 'AIzaSyBt_EFqPjv3AvXpOYf9ejcxKwfeLFbtWl4',
 // authDomain: 'tourism-htt.firebaseapp.com',
 // projectId: 'tourism-htt',

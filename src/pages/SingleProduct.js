@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import singleServiceStyle from '../assets/css/singleService.module.css';
 
@@ -165,6 +166,11 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
+      <div className='my-3 text-center'>
+        <Link to={`/placeorder/${id}`}>
+          <button className='btn btn-outline-success'>Book Your Package</button>
+        </Link>
+      </div>
     </div>
   );
 };

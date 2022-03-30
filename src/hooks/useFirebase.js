@@ -28,7 +28,7 @@ const useFirebase = () => {
           position: 'center',
           icon: 'success',
           title: 'Successfully Registered',
-          text: 'Welcome to Pran RFL',
+          text: 'Welcome to Hit The Trail',
           showConfirmButton: false,
           timer: 2000,
         });
@@ -90,7 +90,7 @@ const useFirebase = () => {
           position: 'center',
           icon: 'success',
           title: 'Successfully Logged in!!',
-          text: 'Welcome Back to PRAN RFL',
+          text: 'Welcome Back to Hit The Trail',
           showConfirmButton: false,
           timer: 2000,
         });

@@ -42,6 +42,10 @@ const PlaceOrder = () => {
       }
     });
   };
+  const discoutPrice = Math.round(
+    parseInt(product?.price) -
+      parseInt(product?.price) * (parseInt(product?.discount) / 100)
+  );
 
   return (
     <>
@@ -55,14 +59,19 @@ const PlaceOrder = () => {
       ) : (
         <Container>
           <Row className='align-items-center'>
+            <h2 className='text-center feature mt-4'>
+              Please Confirm Your Package Booking
+            </h2>
             <Col sm={12} style={{ borderRight: '1px solid #ddd' }} md={6}>
               <img width='100%' src={product.img} alt='' />
             </Col>
             <Col className='my-4' sm={12} md={6}>
-              <h2 className='text-center feature'>Please confirm order</h2>
               <div className='mt-5'>
+                <h2 className='text-success fw-bold'>{product?.title}</h2>
                 <h4>{product.desc}</h4>
-                <h3 className='mt-3'>Price: {product.price}.00TK</h3>
+                <h3 className='mt-3 fw-bold text-warning'>
+                  Price: {discoutPrice}.00TK
+                </h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Row className='mt-3'>
                     <Col sm={12} md={6}>
