@@ -47,10 +47,6 @@ function App() {
             <PrivateRoute path='/products/:id'>
               <SingleProduct></SingleProduct>
             </PrivateRoute>
-
-            {/* <PrivateRoute path='/products/:id'>
-              <SingleProduct></SingleProduct>
-            </PrivateRoute> */}
             <PrivateRoute path='/placeorder/:id'>
               <PlaceOrder></PlaceOrder>
             </PrivateRoute>

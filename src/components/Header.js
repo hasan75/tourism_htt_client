@@ -12,7 +12,7 @@ const Header = () => {
       <Navbar className='navBar' variant='dark' expand='lg'>
         <Container>
           <Navbar.Brand as={Link} to='/'>
-            <img width='100px' height='50px' src={logo} alt='' />
+            <img width='80px' height='80px' src={logo} alt='' />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
@@ -25,7 +25,7 @@ const Header = () => {
               </Nav.Link>
 
               <Nav.Link activeClassName='current' as={NavLink} to='/products'>
-                Products
+                Packages
               </Nav.Link>
               <Nav.Link activeClassName='current' as={NavLink} to='/dashboard'>
                 Dashboard

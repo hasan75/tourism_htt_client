@@ -40,7 +40,8 @@ const Product = ({ product }) => {
           <Card.Body className={productStyle.cardBody}>
             <div className={productStyle.discountContainer}>
               <h6 className={productStyle.discountText}>
-                {discount}% Discount
+                <span className='ms-4'>{discount}% </span>
+                <br /> Discount
               </h6>
             </div>
             <Card.Title className='text-uppercase text-center'>

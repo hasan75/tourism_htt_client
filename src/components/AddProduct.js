@@ -16,8 +16,8 @@ const AddProduct = () => {
   const history = useHistory();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
-    data.rating = 0;
-    data.totalReview = 0;
+    data.rating = 5;
+    data.totalReview = 1;
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure to add this product?',

@@ -6,8 +6,8 @@ import Slider from '../components/Slider.js';
 import useProducts from '../hooks/useProducts.js';
 import './../assets/css/home.css';
 import collection1 from './../assets/images/collection/c1.jpg';
-import collection2 from './../assets/images/collection/c2.jpg';
-import collection3 from './../assets/images/collection/c3.jpg';
+import collection2 from './../assets/images/collection/c2.png';
+import collection3 from './../assets/images/collection/c3.png';
 import collection4 from './../assets/images/collection/c4.jpg';
 import collection5 from './../assets/images/collection/c5.jpg';
 import collection6 from './../assets/images/collection/c6.png';
@@ -23,15 +23,19 @@ const Home = () => {
       <Slider />
       <Container className='collections my-5 mx-auto'>
         <Bounce bottom cascade>
-          <h2 className='text-center feature'>Our Brands</h2>
+          <h2 className='text-center feature'>
+            We have successfully managed several tours for the companies and
+            Institutions.
+          </h2>
         </Bounce>
         <p
           style={{ maxWidth: '650px' }}
           className='text-center mb-2 mx-auto mt-3'
         >
           <Bounce>
-            A curated collection of brands and products for the betterment of
-            your lifestyle. Our Products are designed to serve you.
+            A huge number of companies and educational institutions are our
+            clients. We manages office tours and study tours for these renowned
+            organizations.
           </Bounce>
         </p>
         <Row className='mx-0'>

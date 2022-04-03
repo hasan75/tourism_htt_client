@@ -68,7 +68,7 @@ const ManageProducts = () => {
               <tr>
                 <td>{product.title}</td>
                 <td>{product.desc}</td>
-                <td>${product.price}</td>
+                <td>{product.price} Taka</td>
                 <td className='text-center'>
                   <Link to={`addProduct/${product._id}`}>
                     <Button
