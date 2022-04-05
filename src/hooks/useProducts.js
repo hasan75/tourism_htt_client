@@ -4,10 +4,10 @@ import Swal from 'sweetalert2';
 const useProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000/products')
+    fetch('http://localhost:5001/products')
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.products);
       })
       .catch((err) => {
         Swal.fire({

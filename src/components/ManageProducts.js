@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000/products')
+    fetch('http://localhost:5001/products')
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -29,7 +29,7 @@ const ManageProducts = () => {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteProduct/${id}`, {
+        fetch(`http://localhost:5001/deleteProduct/${id}`, {
           method: 'DELETE',
         })
           .then((res) => res.json())

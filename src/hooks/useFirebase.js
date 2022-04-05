@@ -49,7 +49,7 @@ const useFirebase = () => {
   }
   // add user to db
   function addUserToDB(name, email) {
-    fetch('http://localhost:5000/users', {
+    fetch('http://localhost:5001/users', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name, email }),

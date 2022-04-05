@@ -10,7 +10,7 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${email}`)
+    fetch(`http://localhost:5001/orders?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -27,7 +27,7 @@ const Orders = () => {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/placeorder/${id}`, {
+        fetch(`http://localhost:5001/placeorder/${id}`, {
           method: 'DELETE',
         })
           .then((res) => res.json())
@@ -53,7 +53,7 @@ const Orders = () => {
           <h6>Loading...</h6>
         </div>
       ) : (
-        <Table hover borderless responsive>
+        <Table hover borderless responsive-sm>
           <Toaster position='bottom-left' reverseOrder={false} />
           <thead className='bg-light'>
             <tr>

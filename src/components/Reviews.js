@@ -23,7 +23,7 @@ const Review = ({
       if (wantDelete) {
         const loading = toast.loading('Deleting...Please wait!');
         axios
-          .delete(`http://localhost:5000/deleteReview/${id}`)
+          .delete(`http://localhost:5001/deleteReview/${id}`)
           .then((res) => {
             toast.dismiss(loading);
             if (res.data) {

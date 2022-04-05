@@ -19,7 +19,7 @@ const UpdateProduct = () => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/updateOne/${id}`)
+    fetch(`http://localhost:5001/updateOne/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -36,7 +36,7 @@ const UpdateProduct = () => {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/updateProduct?id=${id}`, {
+        fetch(`http://localhost:5001/updateProduct?id=${id}`, {
           method: 'put',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(data),

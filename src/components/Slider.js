@@ -11,7 +11,11 @@ const Slider = () => {
     <div>
       <Carousel>
         <Carousel.Item interval={3000}>
-          <img className='d-block w-100' src={Slider1} alt='Slider Img' />
+          <img
+            className='d-block w-100 imageSlider'
+            src={Slider1}
+            alt='Slider Img'
+          />
           <Carousel.Caption className=' mb-5 rounded sliderCaption'>
             <h3>Cox's Bazar Sea Beach</h3>
             <p>
@@ -22,7 +26,11 @@ const Slider = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={3000}>
-          <img className='d-block w-100' src={Slider2} alt='Second slide' />
+          <img
+            className='d-block w-100 imageSlider'
+            src={Slider2}
+            alt='Second slide'
+          />
           <Carousel.Caption className=' mb-5 rounded sliderCaption'>
             <h3>Places Hidden in Bangladesh</h3>
             <p>
@@ -34,7 +42,11 @@ const Slider = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={3000}>
-          <img className='d-block w-100' src={Slider3} alt='Third slide' />
+          <img
+            className='d-block w-100 imageSlider'
+            src={Slider3}
+            alt='Third slide'
+          />
           <Carousel.Caption className=' mb-5 rounded sliderCaption'>
             <h3>Saint Martin Iseland</h3>
             <p>
@@ -45,7 +57,11 @@ const Slider = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={3000}>
-          <img className='d-block w-100' src={Slider4} alt='Fourth slide' />
+          <img
+            className='d-block w-100 imageSlider'
+            src={Slider4}
+            alt='Fourth slide'
+          />
           <Carousel.Caption className=' mb-5 rounded sliderCaption'>
             <h3>Ratargul Swam Forest, Sylhet</h3>
             <p>
