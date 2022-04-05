@@ -7,8 +7,8 @@ const Banner = () => {
   // let month = `${today.getMonth() + 1 < 10 ? '0' : ''}${today.getMonth() + 1}`;
   // let year = today.getFullYear();
   // let dateToday = `${day}/${month}/${year}`;
-  let theDate = new Date().toLocaleDateString;
-  let theTime = new Date().toLocaleTimeString;
+  let theDate = new Date().toLocaleDateString();
+  let theTime = new Date().toLocaleTimeString();
   // let fullDate =
   //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   return (
@@ -26,8 +26,7 @@ const Banner = () => {
           <h4>Today is : {day}</h4>
           <h4>Today is : {fullDate}</h4>
           <h4>Today is : {dateToday}</h4> */}
-          <h4>Today is : {theDate}</h4>
-          <h4>Today is : {theTime}</h4>
+          <h4 className='py-2 text-success'>Today's Date : {theDate}</h4>
         </div>
 
         <div className='my-auto col-lg-6'>

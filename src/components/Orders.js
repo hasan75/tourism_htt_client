@@ -86,7 +86,8 @@ const Orders = () => {
               <th>Email ID</th>
               <th>Phone</th>
               <th>Address</th>
-              <th>Product</th>
+              <th>Package</th>
+              <th>Order Date</th>
               <th>Deletion</th>
               <th>Status</th>
             </tr>
@@ -99,7 +100,8 @@ const Orders = () => {
                   <td>{order.email}</td>
                   <td>{order.phone}</td>
                   <td>{order.address}</td>
-                  <td title={order.desc}>{order.desc.slice(0, 10)}...</td>
+                  <td title={order.title}>{order.title.slice(0, 10)}...</td>
+                  <td>{order?.orderDate}</td>
                   <td>
                     <Button
                       variant='outline-danger'

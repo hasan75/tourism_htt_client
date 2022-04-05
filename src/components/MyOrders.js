@@ -58,8 +58,9 @@ const Orders = () => {
           <thead className='bg-light'>
             <tr>
               <th>Image</th>
-              <th>Product</th>
-              <th>Brands</th>
+              <th>Package</th>
+              <th>Description</th>
+              <th>Order Date</th>
               <th>Status</th>
               <th>Deletion</th>
             </tr>
@@ -73,6 +74,7 @@ const Orders = () => {
                   </td>
                   <td>{order.title}</td>
                   <td>{order.desc}</td>
+                  <td>{order?.orderDate}</td>
 
                   <td>
                     <button

@@ -7,6 +7,9 @@ import useContexts from '../hooks/useContexts.js';
 import Swal from 'sweetalert2';
 
 const PlaceOrder = () => {
+  let theOrderDate = new Date().toLocaleDateString();
+  let theOrderTime = new Date().toLocaleTimeString();
+
   const history = useHistory();
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -19,6 +22,8 @@ const PlaceOrder = () => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
+    data.orderDate = theOrderDate;
+    data.orderTime = theOrderTime;
     Swal.fire({
       icon: 'warning',
       title: 'Do you want to confirm your order?',
