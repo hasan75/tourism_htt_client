@@ -79,7 +79,7 @@ const Orders = () => {
     format: [16, 9],
   };
 
-  //handle seach
+  //handle search
   const handleSearch = (e) => {
     setSearchText(e.target.value);
     const matchedOrders = orders.filter(
@@ -128,12 +128,12 @@ const Orders = () => {
         </div>
       ) : (
         <Table ref={pdfRef} hover borderless responsive>
-          {/* <Toaster position='bottom-left' reverseOrder={false} /> */}
+          <Toaster position='bottom-left' reverseOrder={false} />
           <thead className='bg-light'>
             <tr>
               <th colSpan={8} className='text-center text-primary fw-bold'>
                 <span className='text-danger'> Hit The Trail </span> <br />
-                The package list ordered at Hit The Trail <br />
+                The package list booked at Hit The Trail <br />
                 <span className='text-secondary'>
                   Date: {new Date().toDateString()}
                 </span>

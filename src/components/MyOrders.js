@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Spinner, Table, Button } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import useContexts from '../hooks/useContexts.js';
+import myordersStyle from '../assets/css/myorder.module.css';
+import ReactToPdf from 'react-to-pdf';
 
 const Orders = () => {
   const { email } = useContexts();
   const [orders, setOrders] = useState([]);
+  const [displayOrders, setDisplayOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,6 +17,7 @@ const Orders = () => {
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
+        setDisplayOrders(data);
         setLoading(false);
       })
       .catch((error) => toast.error(error.message));
@@ -42,9 +46,50 @@ const Orders = () => {
     });
   };
 
+  //handle search
+  const handleMyOrderSearch = (e) => {
+    const searchText = e.target.value;
+    const matchedOrders = orders.filter(
+      (order) =>
+        order.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        order.desc.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setDisplayOrders(matchedOrders);
+  };
+
+  // useRef for pdf
+  const pdfRef = useRef();
+  const options = {
+    orientation: 'landscape',
+    unit: 'in',
+    format: [12, 12],
+  };
+
   return (
     <div className='px-2  mx-md-2 bg-white' style={{ borderRadius: '15px' }}>
-      <h3 className='text-center fw-bold mb-4'>My orders</h3>
+      <h3 className='text-center fw-bold mb-4'>My Booked Packages</h3>
+      {/* search container  */}
+      <div className={`${myordersStyle.searchContainer} my-2`}>
+        <input
+          type='text'
+          placeholder='enter package name or description or package title to search'
+          onChange={handleMyOrderSearch}
+        />
+      </div>
+      <ReactToPdf
+        targetRef={pdfRef}
+        filename='htt.pdf'
+        options={options}
+        x={0.5}
+        y={0.5}
+        // scale={0.8}
+      >
+        {({ toPdf }) => (
+          <button className='btn btn-warning mb-3' onClick={toPdf}>
+            <i className='fa-solid fa-print'></i>
+          </button>
+        )}
+      </ReactToPdf>
       {loading ? (
         <div className='text-center my-5 private-spinner py-5'>
           <Spinner variant='danger' animation='border' role='status'>
@@ -53,9 +98,18 @@ const Orders = () => {
           <h6>Loading...</h6>
         </div>
       ) : (
-        <Table hover borderless responsive-sm>
+        <Table ref={pdfRef} hover borderless responsive>
           <Toaster position='bottom-left' reverseOrder={false} />
           <thead className='bg-light'>
+            <tr>
+              <th colSpan={8} className='text-center text-primary fw-bold'>
+                <span className='text-danger'> Hit The Trail </span> <br />
+                The package list booked at Hit The Trail <br />
+                <span className='text-secondary'>
+                  Date: {new Date().toDateString()}
+                </span>
+              </th>
+            </tr>
             <tr>
               <th>Image</th>
               <th>Package</th>
@@ -65,7 +119,7 @@ const Orders = () => {
               <th>Deletion</th>
             </tr>
           </thead>
-          {orders.map((order) => {
+          {displayOrders.map((order) => {
             return (
               <tbody key={order._id} style={{ fontWeight: '500' }}>
                 <tr>
