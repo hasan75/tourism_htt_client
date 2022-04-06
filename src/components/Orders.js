@@ -91,6 +91,16 @@ const Orders = () => {
     setDisplayOrders(matchedOrders);
   };
   // console.log(searchText.length);
+  //to find the total price of the booking
+  let totalPrice = displayOrders.reduce((acc, booking) => {
+    return (
+      acc +
+      Math.round(
+        parseInt(booking?.price) -
+          parseInt(booking?.price) * (parseInt(booking?.discount) / 100)
+      )
+    );
+  }, 0);
 
   return (
     <div className='px-2  mx-md-2 bg-white' style={{ borderRadius: '10px' }}>
@@ -140,12 +150,19 @@ const Orders = () => {
               </th>
             </tr>
             <tr>
+              <th colSpan={8} className='text-center text-primary fw-bold'>
+                Total Booking Price:{' '}
+                <span className='text-danger'>{totalPrice}</span>
+              </th>
+            </tr>
+            <tr>
               <th>Name</th>
               <th>Email ID</th>
               <th>Phone</th>
               <th>Address</th>
               <th>Package</th>
               <th>Order Date</th>
+              <th>Price</th>
               <th>Deletion</th>
               <th>Status</th>
             </tr>
@@ -160,6 +177,14 @@ const Orders = () => {
                   <td>{order.address}</td>
                   <td title={order.title}>{order.title}</td>
                   <td>{order?.orderDate}</td>
+                  <td>
+                    {' '}
+                    {Math.round(
+                      parseInt(order?.price) -
+                        parseInt(order?.price) *
+                          (parseInt(order?.discount) / 100)
+                    )}
+                  </td>
                   <td>
                     <Button
                       variant='outline-danger'

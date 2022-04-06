@@ -65,6 +65,9 @@ const Orders = () => {
     format: [12, 12],
   };
 
+  // const handleChangeDate = (e) => {
+  //   console.log(e.target.value);
+  // };
   return (
     <div className='px-2  mx-md-2 bg-white' style={{ borderRadius: '15px' }}>
       <h3 className='text-center fw-bold mb-4'>My Booked Packages</h3>
@@ -76,6 +79,7 @@ const Orders = () => {
           onChange={handleMyOrderSearch}
         />
       </div>
+      {/* <input type='date' onChange={handleChangeDate} /> */}
       <ReactToPdf
         targetRef={pdfRef}
         filename='htt.pdf'
