@@ -1,13 +1,25 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const CheckoutForm = ({ order }) => {
   const { price } = order;
   const [errormsg, setErrormsg] = useState('');
-
+  const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+
+  useEffect(() => {
+    fetch('http://localhost:5001/create-payment-intent', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ price }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, [price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +36,7 @@ const CheckoutForm = ({ order }) => {
       type: 'card',
       card,
     });
+
     if (error) {
       //   console.log(error.message);
       setErrormsg(error.message);
@@ -64,7 +77,7 @@ const CheckoutForm = ({ order }) => {
           className='btn btn-outline-success'
           disabled={!stripe}
         >
-          Pay {price} Taka
+          Pay {parseInt(price)} Taka
         </button>
       </form>
     </div>

@@ -71,9 +71,11 @@ const Payment = () => {
         </div>
       </div>
       <div className='paymentContainer container my-4 text-center'>
-        <Elements stripe={stripePromise}>
-          <CheckoutForm order={order} />
-        </Elements>
+        {order?.price && (
+          <Elements stripe={stripePromise}>
+            <CheckoutForm order={order} />
+          </Elements>
+        )}
       </div>
     </section>
   );
