@@ -21,8 +21,9 @@ const Product = ({ product }) => {
     return_date,
     discount,
   } = product;
-  const priceAfterDiscount = parseInt(price);
-  console.log(priceAfterDiscount);
+
+  // const priceAfterDiscount = parseInt(price);
+
   return (
     <Col className='my-3 text-center' sm={12} md={6} lg={4}>
       <Zoom>
@@ -38,12 +39,14 @@ const Product = ({ product }) => {
             />
           </div>
           <Card.Body className={productStyle.cardBody}>
-            <div className={productStyle.discountContainer}>
-              <h6 className={productStyle.discountText}>
-                <span className='ms-4'>{discount}% </span>
-                <br /> Discount
-              </h6>
-            </div>
+            {parseInt(discount) > 0 && (
+              <div className={productStyle.discountContainer}>
+                <h6 className={productStyle.discountText}>
+                  <span className='ms-4'>{discount}% </span>
+                  <br /> Discount
+                </h6>
+              </div>
+            )}
             <Card.Title className='text-uppercase text-center'>
               {title}
             </Card.Title>

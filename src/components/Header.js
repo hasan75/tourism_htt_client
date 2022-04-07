@@ -31,7 +31,7 @@ const Header = () => {
                 Dashboard
               </Nav.Link>
               {email ? (
-                <Nav.Link>
+                <Nav.Link as={NavLink} to='/'>
                   <button onClick={logout} className='login-button'>
                     {loading ? (
                       <Spinner animation='border' role='status'>

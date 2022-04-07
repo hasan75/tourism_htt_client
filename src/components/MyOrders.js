@@ -5,12 +5,16 @@ import Swal from 'sweetalert2';
 import useContexts from '../hooks/useContexts.js';
 import myordersStyle from '../assets/css/myorder.module.css';
 import ReactToPdf from 'react-to-pdf';
+import ReactToPrint from 'react-to-print';
 
 const Orders = () => {
   const { email } = useContexts();
   const [orders, setOrders] = useState([]);
   const [displayOrders, setDisplayOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // for printing pdf
+  const componentRef = useRef();
 
   useEffect(() => {
     fetch(`http://localhost:5001/orders?email=${email}`)
@@ -39,6 +43,7 @@ const Orders = () => {
             if (data.deletedCount) {
               const modifiedOrders = orders.filter((order) => order._id !== id);
               setOrders(modifiedOrders);
+              setDisplayOrders(modifiedOrders);
               Swal.fire('Deleted!', '', 'success');
             }
           });
@@ -58,19 +63,21 @@ const Orders = () => {
   };
 
   // useRef for pdf
-  const pdfRef = useRef();
-  const options = {
-    orientation: 'landscape',
-    unit: 'in',
-    format: [12, 12],
-  };
+  // const pdfRef = useRef();
+  // const options = {
+  //   orientation: 'landscape',
+  //   unit: 'in',
+  //   format: [12, 12],
+  // };
 
   // const handleChangeDate = (e) => {
   //   console.log(e.target.value);
   // };
+
   return (
     <div className='px-2  mx-md-2 bg-white' style={{ borderRadius: '15px' }}>
       <h3 className='text-center fw-bold mb-4'>My Booked Packages</h3>
+
       {/* search container  */}
       <div className={`${myordersStyle.searchContainer} my-2`}>
         <input
@@ -79,8 +86,9 @@ const Orders = () => {
           onChange={handleMyOrderSearch}
         />
       </div>
+
       {/* <input type='date' onChange={handleChangeDate} /> */}
-      <ReactToPdf
+      {/* <ReactToPdf
         targetRef={pdfRef}
         filename='htt.pdf'
         options={options}
@@ -93,7 +101,21 @@ const Orders = () => {
             <i className='fa-solid fa-print'></i>
           </button>
         )}
-      </ReactToPdf>
+      </ReactToPdf> */}
+      {/* <button className='btn btn-warning mb-3' onClick={handlePrint}>
+        <i className='fa-solid fa-print'></i>
+      </button> */}
+
+      {/* print trigger button  */}
+      <ReactToPrint
+        trigger={() => (
+          <button className='btn btn-warning mb-3'>
+            {' '}
+            <i className='fa-solid fa-print'></i>
+          </button>
+        )}
+        content={() => componentRef.current}
+      />
       {loading ? (
         <div className='text-center my-5 private-spinner py-5'>
           <Spinner variant='danger' animation='border' role='status'>
@@ -102,67 +124,121 @@ const Orders = () => {
           <h6>Loading...</h6>
         </div>
       ) : (
-        <Table ref={pdfRef} hover borderless responsive>
-          <Toaster position='bottom-left' reverseOrder={false} />
-          <thead className='bg-light'>
-            <tr>
-              <th colSpan={8} className='text-center text-primary fw-bold'>
-                <span className='text-danger'> Hit The Trail </span> <br />
-                The package list booked at Hit The Trail <br />
-                <span className='text-secondary'>
-                  Date: {new Date().toDateString()}
-                </span>
-              </th>
-            </tr>
-            <tr>
-              <th>Image</th>
-              <th>Package</th>
-              <th>Description</th>
-              <th>Order Date</th>
-              <th>Status</th>
-              <th>Deletion</th>
-            </tr>
-          </thead>
-          {displayOrders.map((order) => {
-            return (
-              <tbody key={order._id} style={{ fontWeight: '500' }}>
-                <tr>
-                  <td>
-                    <img width='100px' src={order.img} alt='' />
-                  </td>
-                  <td>{order.title}</td>
-                  <td>{order.desc}</td>
-                  <td>{order?.orderDate}</td>
+        <>
+          <Table hover borderless responsive>
+            <Toaster position='bottom-left' reverseOrder={false} />
+            <thead className='bg-light'>
+              <tr>
+                <th colSpan={8} className='text-center text-primary fw-bold'>
+                  <span className='text-danger'> Hit The Trail </span> <br />
+                  The package list booked at Hit The Trail <br />
+                  <span className='text-secondary'>
+                    Date: {new Date().toDateString()}
+                  </span>
+                </th>
+              </tr>
+              <tr>
+                <th>Image</th>
+                <th>Package</th>
+                <th>Description</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Deletion</th>
+              </tr>
+            </thead>
+            {displayOrders.map((order) => {
+              return (
+                <tbody key={order._id} style={{ fontWeight: '500' }}>
+                  <tr>
+                    <td>
+                      <img width='100px' src={order.img} alt='' />
+                    </td>
+                    <td>{order.title}</td>
+                    <td>{order.desc}</td>
+                    <td>{order?.orderDate}</td>
 
-                  <td>
-                    <button
-                      style={{ width: '100px' }}
-                      className={
-                        order.status === 'Pending'
-                          ? 'btn btn-danger'
-                          : order.status === 'Done'
-                          ? 'btn btn-success'
-                          : 'btn btn-info'
-                      }
-                    >
-                      {order.status}
-                    </button>
-                  </td>
-                  <td>
-                    <Button
-                      variant='outline-danger'
-                      className='p-1 ml-3 mb-0'
-                      onClick={() => deletion(order._id)}
-                    >
-                      <i className='fas mx-1 fa-trash'></i>
-                      Delete
-                    </Button>
-                  </td>
+                    <td>
+                      <button
+                        style={{ width: '100px' }}
+                        className={
+                          order.status === 'Pending'
+                            ? 'btn btn-danger'
+                            : order.status === 'Done'
+                            ? 'btn btn-success'
+                            : 'btn btn-info'
+                        }
+                      >
+                        {order.status}
+                      </button>
+                    </td>
+                    <td>
+                      <Button
+                        variant='outline-danger'
+                        className='p-1 ml-3 mb-0'
+                        onClick={() => deletion(order._id)}
+                      >
+                        <i className='fas mx-1 fa-trash'></i>
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </Table>
+          <div style={{ display: 'none' }}>
+            <Table ref={componentRef} hover borderless responsive>
+              <Toaster position='bottom-left' reverseOrder={false} />
+              <thead className='bg-light'>
+                <tr>
+                  <th colSpan={8} className='text-center text-primary fw-bold'>
+                    <span className='text-danger'> Hit The Trail </span> <br />
+                    The package list booked at Hit The Trail <br />
+                    <span className='text-secondary'>
+                      Date: {new Date().toDateString()}
+                    </span>
+                  </th>
                 </tr>
-              </tbody>
-            );
-          })}
-        </Table>
+                <tr>
+                  <th>Image</th>
+                  <th>Package</th>
+                  <th>Description</th>
+                  <th>Order Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              {displayOrders.map((order) => {
+                return (
+                  <tbody key={order._id} style={{ fontWeight: '500' }}>
+                    <tr>
+                      <td>
+                        <img width='100px' src={order.img} alt='' />
+                      </td>
+                      <td>{order.title}</td>
+                      <td>{order.desc}</td>
+                      <td>{order?.orderDate}</td>
+
+                      <td>
+                        <button
+                          style={{ width: '100px' }}
+                          className={
+                            order.status === 'Pending'
+                              ? 'btn btn-danger'
+                              : order.status === 'Done'
+                              ? 'btn btn-success'
+                              : 'btn btn-info'
+                          }
+                        >
+                          {order.status}
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </Table>
+          </div>
+        </>
       )}
     </div>
   );

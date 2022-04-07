@@ -4,13 +4,18 @@ import toast, { Toaster } from 'react-hot-toast';
 import ReactToPdf from 'react-to-pdf';
 import Swal from 'sweetalert2';
 import ordersStyle from '../assets/css/orders.module.css';
+import ReactToPrint from 'react-to-print';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [displayOrders, setDisplayOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState('');
+  const [searchDate, setSearchDate] = useState();
   console.log(orders);
+
+  // for printing pdf
+  const componentRef = useRef();
 
   useEffect(() => {
     fetch(`http://localhost:5001/orders`)
@@ -32,6 +37,7 @@ const Orders = () => {
       modifiedOrders.push(order);
     });
     setOrders(modifiedOrders);
+    setDisplayOrders(modifiedOrders);
     const modifiedStatus = { id, status };
 
     fetch('http://localhost:5001/updateOrderStatus', {
@@ -65,6 +71,7 @@ const Orders = () => {
             if (data.deletedCount) {
               const modifiedOrders = orders.filter((order) => order._id !== id);
               setOrders(modifiedOrders);
+              setDisplayOrders(modifiedOrders);
               Swal.fire('Deleted!', '', 'success');
             }
           });
@@ -72,12 +79,12 @@ const Orders = () => {
     });
   };
   // code for table to pdf
-  const pdfRef = useRef();
-  const options = {
-    orientation: 'landscape',
-    unit: 'in',
-    format: [16, 9],
-  };
+  // const pdfRef = useRef();
+  // const options = {
+  //   orientation: 'landscape',
+  //   unit: 'in',
+  //   format: [18, 10],
+  // };
 
   //handle search
   const handleSearch = (e) => {
@@ -90,7 +97,17 @@ const Orders = () => {
     );
     setDisplayOrders(matchedOrders);
   };
-  // console.log(searchText.length);
+
+  // search by date
+  const handleDateSearch = (e) => {
+    const dateValue = new Date(e.target.value).toLocaleDateString();
+    setSearchDate(dateValue);
+    const matchedOrders = orders.filter(
+      (order) => order?.orderDate === dateValue
+    );
+    setDisplayOrders(matchedOrders);
+  };
+
   //to find the total price of the booking
   let totalPrice = displayOrders.reduce((acc, booking) => {
     return (
@@ -107,15 +124,30 @@ const Orders = () => {
       <h3 className='text-center mb-4 fw-bold my-3'>
         Manage all booking Packages
       </h3>
+
       {/* search container  */}
-      <div className={`${ordersStyle.searchContainer} my-2`}>
-        <input
-          type='text'
-          placeholder='enter email or name or package title to search'
-          onChange={handleSearch}
-        />
+      <div className='row'>
+        <div className='col-md-6'>
+          <div className={`${ordersStyle.searchContainer} my-2`}>
+            <input
+              type='text'
+              placeholder='enter email or name or package title to search'
+              onChange={handleSearch}
+            />
+          </div>
+        </div>
+        {/* search by date container  */}
+        <div className='col-md-6 d-flex justify-content-center align-items-center'>
+          <label htmlFor='dateSearch'>Search By Date</label>
+          <input
+            type='date'
+            className='form-control'
+            onChange={handleDateSearch}
+          />
+        </div>
       </div>
-      <ReactToPdf
+
+      {/* <ReactToPdf
         targetRef={pdfRef}
         filename='htt.pdf'
         options={options}
@@ -128,7 +160,19 @@ const Orders = () => {
             <i className='fa-solid fa-print'></i>
           </button>
         )}
-      </ReactToPdf>
+      </ReactToPdf> */}
+
+      {/* //react to print button   */}
+      <ReactToPrint
+        trigger={() => (
+          <button className='btn btn-warning mb-3'>
+            {' '}
+            <i className='fa-solid fa-print'></i>
+          </button>
+        )}
+        content={() => componentRef.current}
+      />
+
       {loading ? (
         <div className='text-center my-5 private-spinner py-5'>
           <Spinner variant='danger' animation='border' role='status'>
@@ -137,88 +181,169 @@ const Orders = () => {
           <h6>Loading...</h6>
         </div>
       ) : (
-        <Table ref={pdfRef} hover borderless responsive>
-          <Toaster position='bottom-left' reverseOrder={false} />
-          <thead className='bg-light'>
-            <tr>
-              <th colSpan={8} className='text-center text-primary fw-bold'>
-                <span className='text-danger'> Hit The Trail </span> <br />
-                The package list booked at Hit The Trail <br />
-                <span className='text-secondary'>
-                  Date: {new Date().toDateString()}
-                </span>
-              </th>
-            </tr>
-            <tr>
-              <th colSpan={8} className='text-center text-primary fw-bold'>
-                Total Booking Price:{' '}
-                <span className='text-danger'>{totalPrice}</span>
-              </th>
-            </tr>
-            <tr>
-              <th>Name</th>
-              <th>Email ID</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Package</th>
-              <th>Order Date</th>
-              <th>Price</th>
-              <th>Deletion</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          {displayOrders.map((order) => {
-            return (
-              <tbody key={order._id} style={{ fontWeight: '500' }}>
+        <>
+          <Table hover borderless responsive>
+            <Toaster position='bottom-left' reverseOrder={false} />
+            <thead className='bg-light'>
+              <tr>
+                <th colSpan={8} className='text-center text-primary fw-bold'>
+                  <span className='text-danger'> Hit The Trail </span> <br />
+                  The package list booked at Hit The Trail <br />
+                  <span className='text-secondary'>
+                    Date: {new Date().toDateString()}
+                  </span>
+                </th>
+              </tr>
+              <tr>
+                <th colSpan={8} className='text-center text-primary fw-bold'>
+                  Total Booking Price:{' '}
+                  <span className='text-danger'>{totalPrice}</span>
+                </th>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <th>Email ID</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Package</th>
+                <th>Order Date</th>
+                <th>Price</th>
+                <th>Deletion</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            {displayOrders.map((order) => {
+              return (
+                <tbody key={order._id} style={{ fontWeight: '500' }}>
+                  <tr>
+                    <td>{order.name}</td>
+                    <td>{order.email}</td>
+                    <td>{order.phone}</td>
+                    <td>{order.address}</td>
+                    <td title={order.title}>{order.title}</td>
+                    <td>{order?.orderDate}</td>
+                    <td>
+                      {' '}
+                      {Math.round(
+                        parseInt(order?.price) -
+                          parseInt(order?.price) *
+                            (parseInt(order?.discount) / 100)
+                      )}
+                    </td>
+                    <td>
+                      <Button
+                        variant='outline-danger'
+                        className='p-1 ml-3 mb-0'
+                        onClick={() => deletion(order._id)}
+                      >
+                        <i className='fas mx-1 fa-trash'></i>
+                        Delete
+                      </Button>
+                    </td>
+                    <td>
+                      <select
+                        className={
+                          order.status === 'Pending'
+                            ? 'btn btn-danger'
+                            : order.status === 'Done'
+                            ? 'btn btn-success'
+                            : 'btn btn-info'
+                        }
+                        defaultValue={order.status}
+                        onChange={(e) =>
+                          handleStatusChange(order._id, e.target.value)
+                        }
+                      >
+                        <option className='bg-white text-muted'>Pending</option>
+                        <option className='bg-white text-muted'>
+                          On going
+                        </option>
+                        <option className='bg-white text-muted'>Done</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </Table>
+          <div style={{ display: 'none' }}>
+            <Table ref={componentRef} hover borderless responsive>
+              <Toaster position='bottom-left' reverseOrder={false} />
+              <thead className='bg-light'>
                 <tr>
-                  <td>{order.name}</td>
-                  <td>{order.email}</td>
-                  <td>{order.phone}</td>
-                  <td>{order.address}</td>
-                  <td title={order.title}>{order.title}</td>
-                  <td>{order?.orderDate}</td>
-                  <td>
-                    {' '}
-                    {Math.round(
-                      parseInt(order?.price) -
-                        parseInt(order?.price) *
-                          (parseInt(order?.discount) / 100)
-                    )}
-                  </td>
-                  <td>
-                    <Button
-                      variant='outline-danger'
-                      className='p-1 ml-3 mb-0'
-                      onClick={() => deletion(order._id)}
-                    >
-                      <i className='fas mx-1 fa-trash'></i>
-                      Delete
-                    </Button>
-                  </td>
-                  <td>
-                    <select
-                      className={
-                        order.status === 'Pending'
-                          ? 'btn btn-danger'
-                          : order.status === 'Done'
-                          ? 'btn btn-success'
-                          : 'btn btn-info'
-                      }
-                      defaultValue={order.status}
-                      onChange={(e) =>
-                        handleStatusChange(order._id, e.target.value)
-                      }
-                    >
-                      <option className='bg-white text-muted'>Pending</option>
-                      <option className='bg-white text-muted'>On going</option>
-                      <option className='bg-white text-muted'>Done</option>
-                    </select>
-                  </td>
+                  <th colSpan={8} className='text-center text-primary fw-bold'>
+                    <span className='text-danger'> Hit The Trail </span> <br />
+                    The package list booked at Hit The Trail <br />
+                    <span className='text-secondary'>
+                      Date: {new Date().toDateString()}
+                    </span>
+                  </th>
                 </tr>
-              </tbody>
-            );
-          })}
-        </Table>
+                <tr>
+                  <th colSpan={8} className='text-center text-primary fw-bold'>
+                    Total Booking Price:{' '}
+                    <span className='text-danger'>{totalPrice}</span>
+                  </th>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <th>Email ID</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Package</th>
+                  <th>Order Date</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              {displayOrders.map((order) => {
+                return (
+                  <tbody key={order._id} style={{ fontWeight: '500' }}>
+                    <tr>
+                      <td>{order.name}</td>
+                      <td>{order.email}</td>
+                      <td>{order.phone}</td>
+                      <td>{order.address}</td>
+                      <td title={order.title}>{order.title}</td>
+                      <td>{order?.orderDate}</td>
+                      <td>
+                        {' '}
+                        {Math.round(
+                          parseInt(order?.price) -
+                            parseInt(order?.price) *
+                              (parseInt(order?.discount) / 100)
+                        )}
+                      </td>
+                      <td>
+                        <select
+                          className={
+                            order.status === 'Pending'
+                              ? 'btn btn-danger'
+                              : order.status === 'Done'
+                              ? 'btn btn-success'
+                              : 'btn btn-info'
+                          }
+                          defaultValue={order.status}
+                          onChange={(e) =>
+                            handleStatusChange(order._id, e.target.value)
+                          }
+                        >
+                          <option className='bg-white text-muted'>
+                            Pending
+                          </option>
+                          <option className='bg-white text-muted'>
+                            On going
+                          </option>
+                          <option className='bg-white text-muted'>Done</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </Table>
+          </div>
+        </>
       )}
     </div>
   );
