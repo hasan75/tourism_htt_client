@@ -13,11 +13,6 @@ const Banner = () => {
   // let fullDate =
   //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-  const getValue = (e) => {
-    let value = e.target.value;
-    console.log(new Date(value).toLocaleDateString());
-  };
-
   return (
     <div className='mt-2'>
       <div className='container col-lg-12 d-lg-flex py-5 banner'>
@@ -34,10 +29,6 @@ const Banner = () => {
           <h4>Today is : {fullDate}</h4>
           <h4>Today is : {dateToday}</h4> */}
           <h4 className='py-2 text-success'>Today's Date : {theDate}</h4>
-
-          <div>
-            <input type='date' className='form-control' onChange={getValue} />
-          </div>
         </div>
 
         <div className='my-auto col-lg-6'>
