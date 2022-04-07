@@ -1,6 +1,14 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import paymentStyle from '../assets/css/payment.module.css';
+import CheckoutForm from './CheckoutForm';
+
+// publishable key is added from stripe js
+const stripePromise = loadStripe(
+  'pk_test_51Jz4DvAGeXXLEp16fDRF0qcMZmDbvKfF9xM0MFYZBx0OTTP7sCAz6uGZuwTUAa6HDequykJ5zp0QduqkdHihFZCW00YDpRO0Jw'
+);
 
 const Payment = () => {
   const { orderId } = useParams();
@@ -62,7 +70,11 @@ const Payment = () => {
           </div>
         </div>
       </div>
-      <div className='userInfo my-1'></div>
+      <div className='paymentContainer container my-4'>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
+      </div>
     </section>
   );
 };
