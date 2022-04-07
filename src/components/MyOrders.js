@@ -6,6 +6,7 @@ import useContexts from '../hooks/useContexts.js';
 import myordersStyle from '../assets/css/myorder.module.css';
 import ReactToPdf from 'react-to-pdf';
 import ReactToPrint from 'react-to-print';
+import { Link } from 'react-router-dom';
 
 const Orders = () => {
   const { email } = useContexts();
@@ -142,8 +143,10 @@ const Orders = () => {
                 <th>Package</th>
                 <th>Description</th>
                 <th>Order Date</th>
+                <th>Cost</th>
                 <th>Status</th>
-                <th>Deletion</th>
+                <th>Payment Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             {displayOrders.map((order) => {
@@ -156,6 +159,13 @@ const Orders = () => {
                     <td>{order.title}</td>
                     <td>{order.desc}</td>
                     <td>{order?.orderDate}</td>
+                    <td>
+                      {Math.round(
+                        parseInt(order?.price) -
+                          parseInt(order?.price) *
+                            (parseInt(order?.discount) / 100)
+                      )}
+                    </td>
 
                     <td>
                       <button
@@ -170,6 +180,15 @@ const Orders = () => {
                       >
                         {order.status}
                       </button>
+                    </td>
+                    <td>
+                      {order.payment ? (
+                        'Paid'
+                      ) : (
+                        <Link to={`/dashboard/payment/${order._id}`}>
+                          <button className='btn btn-primary'>Pay</button>
+                        </Link>
+                      )}
                     </td>
                     <td>
                       <Button

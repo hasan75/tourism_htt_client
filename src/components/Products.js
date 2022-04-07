@@ -13,7 +13,7 @@ const Products = () => {
   const [displayServices, setDisplayServices] = useState([]);
   const size = 6;
   // console.log(displayServices);
-  console.log(products);
+  // console.log(products);
 
   useEffect(() => {
     fetch(`http://localhost:5001/products?page=${page}&&size=${size}`)

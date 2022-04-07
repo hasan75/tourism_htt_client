@@ -121,6 +121,9 @@ const Dashboard = () => {
               <Route exact path={`${path}/profile`}>
                 <Profile></Profile>
               </Route>
+              <Route path={`${path}/payment/:orderId`}>
+                <Payment></Payment>
+              </Route>
               <AdminRoute exact path={`${path}/orders`}>
                 <Orders></Orders>
               </AdminRoute>

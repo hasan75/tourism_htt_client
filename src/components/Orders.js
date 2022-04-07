@@ -12,7 +12,7 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [searchDate, setSearchDate] = useState();
-  console.log(orders);
+  // console.log(orders);
 
   // for printing pdf
   const componentRef = useRef();
