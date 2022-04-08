@@ -89,13 +89,6 @@ const Dashboard = () => {
                     </NavLink>
                   </li>
                 )}
-                {user?.role !== 'admin' && (
-                  <li className='sideBarLink'>
-                    <NavLink to={`${url}/payment`}>
-                      <i className='fab fa-amazon-pay'></i>Payment
-                    </NavLink>
-                  </li>
-                )}
                 {user?.role === 'admin' && (
                   <li className='sideBarLink'>
                     <NavLink to={`${url}/manageProduct`}>

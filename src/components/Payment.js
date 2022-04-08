@@ -1,6 +1,7 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import paymentStyle from '../assets/css/payment.module.css';
 import CheckoutForm from './CheckoutForm';
@@ -71,10 +72,14 @@ const Payment = () => {
         </div>
       </div>
       <div className='paymentContainer container my-4 text-center'>
-        {order?.price && (
+        {order?.price ? (
           <Elements stripe={stripePromise}>
             <CheckoutForm order={order} />
           </Elements>
+        ) : (
+          <Spinner variant='primary' animation='border' role='status'>
+            <span className='visually-hidden'>Loading...</span>
+          </Spinner>
         )}
       </div>
     </section>

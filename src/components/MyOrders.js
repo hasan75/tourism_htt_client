@@ -207,7 +207,7 @@ const Orders = () => {
           </Table>
           <div style={{ display: 'none' }}>
             <Table ref={componentRef} hover borderless responsive>
-              <Toaster position='bottom-left' reverseOrder={false} />
+              {/* <Toaster position='bottom-left' reverseOrder={false} /> */}
               <thead className='bg-light'>
                 <tr>
                   <th colSpan={8} className='text-center text-primary fw-bold'>
@@ -223,7 +223,8 @@ const Orders = () => {
                   <th>Package</th>
                   <th>Description</th>
                   <th>Order Date</th>
-                  <th>Status</th>
+                  <th>Confirm Status</th>
+                  <th>Payment Status</th>
                 </tr>
               </thead>
               {displayOrders.map((order) => {
@@ -251,6 +252,7 @@ const Orders = () => {
                           {order.status}
                         </button>
                       </td>
+                      <td>{order.payment ? 'Paid' : 'Not Paid Yet'}</td>
                     </tr>
                   </tbody>
                 );

@@ -206,10 +206,11 @@ const Orders = () => {
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Package</th>
-                <th>Order Date</th>
-                <th>Price</th>
-                <th>Deletion</th>
-                <th>Status</th>
+                <th>Booking Date</th>
+                <th>Cost</th>
+                <th>Action</th>
+                <th>Booking Status</th>
+                <th>Payment Status</th>
               </tr>
             </thead>
             {displayOrders.map((order) => {
@@ -261,6 +262,7 @@ const Orders = () => {
                         <option className='bg-white text-muted'>Done</option>
                       </select>
                     </td>
+                    <td>{order?.payment ? 'Paid' : 'Not Paid'}</td>
                   </tr>
                 </tbody>
               );
@@ -268,7 +270,6 @@ const Orders = () => {
           </Table>
           <div style={{ display: 'none' }}>
             <Table ref={componentRef} hover borderless responsive>
-              <Toaster position='bottom-left' reverseOrder={false} />
               <thead className='bg-light'>
                 <tr>
                   <th colSpan={8} className='text-center text-primary fw-bold'>
@@ -291,9 +292,10 @@ const Orders = () => {
                   <th>Phone</th>
                   <th>Address</th>
                   <th>Package</th>
-                  <th>Order Date</th>
-                  <th>Price</th>
-                  <th>Status</th>
+                  <th>Booking Date</th>
+                  <th>Cost</th>
+                  <th>Booking Status</th>
+                  <th>Payment Status</th>
                 </tr>
               </thead>
               {displayOrders.map((order) => {
@@ -337,6 +339,7 @@ const Orders = () => {
                           <option className='bg-white text-muted'>Done</option>
                         </select>
                       </td>
+                      <td>{order?.payment ? 'Paid' : 'Not Paid'}</td>
                     </tr>
                   </tbody>
                 );
