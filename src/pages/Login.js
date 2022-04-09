@@ -1,60 +1,81 @@
-import React from "react";
-import "./../assets/css/login.css";
-import { useForm } from "react-hook-form";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import avatar from "./../assets/images/avater.png";
-import useContexts from "../hooks/useContexts.js";
-import { Spinner } from "react-bootstrap";
+import React from 'react';
+import './../assets/css/login.css';
+import { useForm } from 'react-hook-form';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import avatar from './../assets/images/avater.png';
+import useContexts from '../hooks/useContexts.js';
+import { Spinner } from 'react-bootstrap';
+import { GoogleAuthProvider } from 'firebase/auth';
 const Login = () => {
-  const { userLogin, loading, email } = useContexts();
+  const {
+    userLogin,
+    loading,
+    email,
+    googleRegister,
+    handleGoogleSignIn,
+    setLoading,
+  } = useContexts();
   const { register, handleSubmit } = useForm();
   const history = useHistory();
   const location = useLocation();
-  const redirect = location?.state?.from || "/home";
+  const redirect = location?.state?.from || '/home';
   const onSubmit = (data) => {
     userLogin({ ...data, history, redirect });
   };
+  const handleGoogleSubit = () => {
+    googleRegister({ history, redirect });
+  };
+
   if (email) {
-    return <>{history.replace("/")}</>;
+    return <>{history.replace('/')}</>;
   } else {
     return (
-      <div className="login-page">
+      <div className='login-page'>
         <div
-          style={{ height: "100vh" }}
-          className="d-flex mx-3 align-items-center justify-content-center"
+          style={{ height: '100vh' }}
+          className='d-flex mx-3 align-items-center justify-content-center'
         >
-          <div className="formContainer">
-            <div className="text-center mb-2">
-              <img width="120px" src={avatar} alt="" />
+          <div className='formContainer'>
+            <div className='text-center mb-2'>
+              <img width='120px' src={avatar} alt='' />
             </div>
-            <h2 className="text-center text-white mt-4">Please Login</h2>
-            <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
+            <h2 className='text-center text-white mt-4'>Please Login</h2>
+            <form className='loginForm' onSubmit={handleSubmit(onSubmit)}>
               <input
-                className="form-control"
-                type="email"
+                className='form-control'
+                type='email'
                 required
-                {...register("email", { required: true })}
-                placeholder="Enter your email"
+                {...register('email', { required: true })}
+                placeholder='Enter your email'
               />
               <input
                 required
-                type="password"
-                className="form-control"
-                {...register("password", { required: true })}
-                placeholder="Enter your password"
+                type='password'
+                className='form-control'
+                {...register('password', { required: true })}
+                placeholder='Enter your password'
               />
-              <button className="btn register-btn" type="submit">
+              <button className='btn register-btn' type='submit'>
                 {loading ? (
-                  <Spinner animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                  <Spinner animation='border' role='status'>
+                    <span className='visually-hidden'>Loading...</span>
                   </Spinner>
                 ) : (
-                  "Login"
+                  'Login'
                 )}
               </button>
             </form>
-            <h6 className="text-center text-white">
-              New user? <Link to="/register" className="text-warning"> Please register!</Link>
+            <span className='text-light'>OR</span>
+            <button onClick={handleGoogleSubit} className='btn register-btn'>
+              <i class='fab fa-google'></i>{' '}
+              <span className='text-light'>Login with google</span>
+            </button>
+            <h6 className='text-center text-white'>
+              New user?{' '}
+              <Link to='/register' className='text-warning'>
+                {' '}
+                Please register!
+              </Link>
             </h6>
           </div>
         </div>
