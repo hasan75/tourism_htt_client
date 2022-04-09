@@ -119,15 +119,6 @@ const Orders = () => {
     setdateRangeLast(e.target.value);
   };
 
-  // (new Date(dateRangeStart).toDateString() ===
-  //   new Date(order.orderDate).toDateString() &&
-  //   new Date(dateRangeLast).toDateString() ===
-  //     new Date(order.orderDate).toDateString()) ||
-  // (new Date(dateRangeStart).toDateString() ===
-  //   new Date(order.orderDate).toDateString() &&
-  //   new Date(dateRangeLast).toDateString() ===
-  //     new Date(order.orderDate).toDateString())
-
   //handle range search
   const handleSearchRange = () => {
     const bookingsByRange = orders.filter(
@@ -151,6 +142,13 @@ const Orders = () => {
         parseInt(booking?.price) -
           parseInt(booking?.price) * (parseInt(booking?.discount) / 100)
       )
+    );
+  }, 0);
+
+  let totalPaidPrice = displayOrders.reduce((accu, bookingPay) => {
+    return (
+      accu +
+      (bookingPay?.payment?.amount ? bookingPay?.payment?.amount / 100 : 0)
     );
   }, 0);
 
@@ -254,7 +252,7 @@ const Orders = () => {
             <Toaster position='bottom-left' reverseOrder={false} />
             <thead className='bg-light'>
               <tr>
-                <th colSpan={8} className='text-center text-primary fw-bold'>
+                <th colSpan={10} className='text-center text-primary fw-bold'>
                   <span className='text-danger'> Hit The Trail </span> <br />
                   The package list booked at Hit The Trail <br />
                   <span className='text-secondary'>
@@ -263,9 +261,15 @@ const Orders = () => {
                 </th>
               </tr>
               <tr>
-                <th colSpan={8} className='text-center text-primary fw-bold'>
+                <th colSpan={10} className='text-center text-primary fw-bold'>
                   Total Booking Price:{' '}
                   <span className='text-danger'>{totalPrice}</span>
+                </th>
+              </tr>
+              <tr>
+                <th colSpan={10} className='text-center text-primary fw-bold'>
+                  Total Paid Booking Price:{' '}
+                  <span className='text-danger'>{totalPaidPrice}</span>
                 </th>
               </tr>
               <tr>
