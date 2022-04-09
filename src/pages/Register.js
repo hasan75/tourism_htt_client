@@ -68,7 +68,7 @@ const Register = () => {
             </form>
             <span className='text-center text-light'>Or</span>
             <button onClick={handleGoogleSubmit} className='btn register-btn'>
-              <i class='fab fa-google'></i>{' '}
+              <i className='fab fa-google'></i>{' '}
               <span className='text-light'>Login with google</span>
             </button>
             <h6 className='text-center text-white'>

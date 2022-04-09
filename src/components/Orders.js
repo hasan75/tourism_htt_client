@@ -263,13 +263,13 @@ const Orders = () => {
               <tr>
                 <th colSpan={10} className='text-center text-primary fw-bold'>
                   Total Booking Price:{' '}
-                  <span className='text-danger'>{totalPrice}</span>
+                  <span className='text-danger'>{totalPrice}</span> Taka
                 </th>
               </tr>
               <tr>
                 <th colSpan={10} className='text-center text-primary fw-bold'>
                   Total Paid Booking Price:{' '}
-                  <span className='text-danger'>{totalPaidPrice}</span>
+                  <span className='text-danger'>{totalPaidPrice}</span> Taka
                 </th>
               </tr>
               <tr>
@@ -334,7 +334,13 @@ const Orders = () => {
                         <option className='bg-white text-muted'>Done</option>
                       </select>
                     </td>
-                    <td>{order?.payment ? 'Paid' : 'Not Paid'}</td>
+                    <td>
+                      {order?.payment ? (
+                        <span className='text-success'>Paid</span>
+                      ) : (
+                        <span className='text-warning'>Not Paid</span>
+                      )}
+                    </td>
                   </tr>
                 </tbody>
               );

@@ -8,8 +8,8 @@ import toast from 'react-hot-toast';
 import '../assets/css/Testimonials.css';
 import SingleReview from './SingleReview.js';
 
-const SingleReviews = ({ id, service }) => {
-  console.log(id);
+const SingleReviews = ({ id, title }) => {
+  // console.log(id);
   SwiperCore.use([Pagination, Autoplay]);
   const [loading, setLoading] = useState(true);
   const [Reviews, setReviews] = useState([]);
@@ -24,7 +24,7 @@ const SingleReviews = ({ id, service }) => {
   }, []);
 
   const matchedReviews = Reviews.filter((review) => review?.packageId === id);
-  console.log(matchedReviews);
+  // console.log(matchedReviews);
 
   return (
     <section
@@ -35,7 +35,7 @@ const SingleReviews = ({ id, service }) => {
       <Fade bottom duration={2500} distance='40px'>
         <div className='my-5 py-4'>
           <div className='review-title text-center'>
-            <span>Customers Review about {service.title}</span>
+            <span>Customers Review about {title}</span>
             <h2>Reviews</h2>
           </div>
           {loading ? (

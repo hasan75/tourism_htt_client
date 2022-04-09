@@ -58,7 +58,8 @@ const ManageProducts = () => {
           <tr>
             <th>Service</th>
             <th>Description</th>
-            <th>Price</th>
+            <th>Base Price</th>
+            <th>Discounted Price</th>
             <th className='text-center'>Action</th>
           </tr>
         </thead>
@@ -67,13 +68,21 @@ const ManageProducts = () => {
             <tbody key={product._id} style={{ fontWeight: '500' }}>
               <tr>
                 <td>{product.title}</td>
-                <td>{product.desc}</td>
+                <td>{product.desc.slice(0, 50)}...</td>
                 <td>{product.price} Taka</td>
-                <td className='text-center'>
+                <td className='text-success'>
+                  {Math.round(
+                    parseInt(product?.price) -
+                      parseInt(product?.price) *
+                        (parseInt(product?.discount) / 100)
+                  )}{' '}
+                  Taka
+                </td>
+                <td className='d-flex justify-content-center align-items-center'>
                   <Link to={`addProduct/${product._id}`}>
                     <Button
                       variant='outline-success'
-                      className='p-1 me-2 mb-0'
+                      className='p-1 me-2 mb-1'
                       onClick={() => {}}
                     >
                       <i className='fas fa-edit  mx-1'></i>

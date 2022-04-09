@@ -11,13 +11,15 @@ import useContexts from '../hooks/useContexts';
 import { useForm } from 'react-hook-form';
 import Rating from 'react-rating';
 import SingleReviews from '../components/SingleReviews';
+import { useLocation } from 'react-router-dom';
 
 const SingleProduct = () => {
   const { id } = useParams();
   const [service, setService] = useState({});
-  const [reviews, setReviews] = useState({});
+  const [reviews, setReviews] = useState([]);
 
-  const history = useHistory();
+  // const location = useLocation();
+
   const [rating, setRating] = useState(5);
   const { displayName, email, photoURL } = useContexts();
   const { register, handleSubmit, reset } = useForm();
@@ -33,9 +35,18 @@ const SingleProduct = () => {
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
-  console.log(reviews);
+  // console.log(reviews);
 
-  const matchedReviewbyIdandEmail = reviews.find(
+  // const findOne = () => {
+  //   const matchedReviewbyIdandEmail = reviews?.find(
+  //     (r) => r.email === email && r.packageId === id
+  //   );
+  // }
+  // findOne();
+  // reviews?.find(
+  //   (review) => review.email === email && review?.packageId === id
+  // );
+  const matchedReviewbyIdandEmail = reviews?.find(
     (review) => review.email === email && review?.packageId === id
   );
 
@@ -69,7 +80,7 @@ const SingleProduct = () => {
             if (data.insertedId) {
               reset();
               Swal.fire('Publish on review section!', '', 'success');
-              history.replace('/');
+              window.location.reload();
             }
           });
       }
@@ -106,42 +117,42 @@ const SingleProduct = () => {
               </div>
               <div className='ps-3'>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 mx-2 text-secondary`}
                 >
                   Destination:{' '}
                   <span className='fw-bold'>{service?.destination}</span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Journey From: <span className='fw-bold'>{service?.from}</span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Journey Date:{' '}
                   <span className='fw-bold'>{service?.tour_date}</span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Reporting Time:{' '}
                   <span className='fw-bold'>{service?.start_time}</span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Return Date:{' '}
                   <span className='fw-bold'>{service?.return_date}</span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Estimated Cost:{' '}
                   <span className='fw-bold'>{service?.price}</span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Discount Available:{' '}
                   <span className='fw-bold text-danger'>
@@ -149,7 +160,7 @@ const SingleProduct = () => {
                   </span>
                 </span>
                 <span
-                  className={`${singleServiceStyle.infoText} my-2 text-secondary`}
+                  className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Discount Price:{' '}
                   <span className='fw-bold text-success'>{discoutPrice}</span>
@@ -166,22 +177,22 @@ const SingleProduct = () => {
               <h5 className='text-warning fw-bold my-2 pt-3'>
                 Read the points below before you book your package
               </h5>
-              <ul class='list-group my-2 py-3'>
-                <li class='list-group-item'>
+              <ul className='list-group my-2 py-3'>
+                <li className='list-group-item'>
                   Every Tour consists of minimum 15 people, so you have to be
                   with a group
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   No Extra Costs like snacks, cigarette, extra food, extra guide
                   will be beared by host.
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   Members have to listen to the host's call
                 </li>
-                <li class='list-group-item text-danger'>
+                <li className='list-group-item text-danger'>
                   No alcohol is allowed in the tour.
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   Your guide or host won't be the person which will carry your
                   belongings.
                 </li>
@@ -198,25 +209,25 @@ const SingleProduct = () => {
                 travel agent to book your future travel, I’ve partnered with
                 Ataur Rahman Masum, owner of Hit The Trail.
               </p>
-              <ul class='list-group my-2 py-3'>
-                <li class='list-group-item'>
+              <ul className='list-group my-2 py-3'>
+                <li className='list-group-item'>
                   The #1 benefit of using HTT when it comes to booking your
                   family travel is because travel is our expertise.
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   We, the hosts of Hit The Trail have the greatest Destination
                   knowledge.
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   that travelers do not pay more for vacations because Hit The
                   Trail is always with you.
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   The relationship you’ll form with your Hit The Trail host, as
                   well as their relationships with other hosts, are two of the
                   benefits of using Hit The Trail as your travel partner.
                 </li>
-                <li class='list-group-item'>
+                <li className='list-group-item'>
                   Our Hosts will be the best assistance to you in your trip.
                   They will assist you anywhere, anyhow!! That's the main
                   advantage if you get the service of Hit The Trail
@@ -232,7 +243,7 @@ const SingleProduct = () => {
         </Link>
       </div>
       {/* review show sections  */}
-      <SingleReviews id={id} service={service}></SingleReviews>
+      <SingleReviews id={id} title={service.title}></SingleReviews>
 
       {/* add review sections  */}
       <section className='container my-4'>
