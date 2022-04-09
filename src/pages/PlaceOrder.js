@@ -20,6 +20,10 @@ const PlaceOrder = () => {
       .then((data) => setProduct(data));
   }, [id]);
 
+  // for date comparison
+  let todayDate = new Date();
+  const eventDate = new Date(product.tour_date);
+
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     data.orderDate = theOrderDate;
@@ -139,11 +143,17 @@ const PlaceOrder = () => {
                       />
                     </Col>
                   </Row>
-                  <input
-                    value='Order Now'
-                    className='btn btn-primary'
-                    type='submit'
-                  />
+                  {todayDate >= eventDate ? (
+                    <h2 className='text-danger fw-bold'>
+                      Sorry! This event is past. You can't book this.
+                    </h2>
+                  ) : (
+                    <input
+                      value='Order Now'
+                      className='btn btn-primary'
+                      type='submit'
+                    />
+                  )}
                 </form>
               </div>
             </Col>

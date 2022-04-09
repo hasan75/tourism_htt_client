@@ -12,6 +12,8 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [searchDate, setSearchDate] = useState();
+  const [dateRangeStart, setdateRangeStart] = useState();
+  const [dateRangeLast, setdateRangeLast] = useState();
   // console.log(orders);
 
   // for printing pdf
@@ -108,6 +110,39 @@ const Orders = () => {
     setDisplayOrders(matchedOrders);
   };
 
+  //handle inputs for range
+  const handleRangeStart = (e) => {
+    setdateRangeStart(e.target.value);
+  };
+
+  const handleRangeLast = (e) => {
+    setdateRangeLast(e.target.value);
+  };
+
+  // (new Date(dateRangeStart).toDateString() ===
+  //   new Date(order.orderDate).toDateString() &&
+  //   new Date(dateRangeLast).toDateString() ===
+  //     new Date(order.orderDate).toDateString()) ||
+  // (new Date(dateRangeStart).toDateString() ===
+  //   new Date(order.orderDate).toDateString() &&
+  //   new Date(dateRangeLast).toDateString() ===
+  //     new Date(order.orderDate).toDateString())
+
+  //handle range search
+  const handleSearchRange = () => {
+    const bookingsByRange = orders.filter(
+      (order) =>
+        (new Date(dateRangeStart) < new Date(order.orderDate) &&
+          new Date(dateRangeLast) > new Date(order.orderDate)) ||
+        new Date(dateRangeStart).toDateString() ===
+          new Date(order.orderDate).toDateString() ||
+        new Date(dateRangeLast).toDateString() ===
+          new Date(order.orderDate).toDateString()
+    );
+    setDisplayOrders(bookingsByRange);
+    console.log(bookingsByRange);
+  };
+
   //to find the total price of the booking
   let totalPrice = displayOrders.reduce((acc, booking) => {
     return (
@@ -127,7 +162,7 @@ const Orders = () => {
 
       {/* search container  */}
       <div className='row'>
-        <div className='col-md-6'>
+        <div className='col-md-7'>
           <div className={`${ordersStyle.searchContainer} my-2`}>
             <input
               type='text'
@@ -137,13 +172,46 @@ const Orders = () => {
           </div>
         </div>
         {/* search by date container  */}
-        <div className='col-md-6 d-flex justify-content-center align-items-center'>
+        <div className='col-md-5 d-flex justify-content-center align-items-center'>
           <label htmlFor='dateSearch'>Search By Date</label>
           <input
             type='date'
             className='form-control'
             onChange={handleDateSearch}
           />
+        </div>
+      </div>
+      <div className='row my-2'>
+        <div className='col-12'>
+          <h5 className=' text-success'>Search By Booking Date Range</h5>
+          <div className='d-flex align-items-center'>
+            <div className='d-flex justify-content-center align-items-center my-2'>
+              <label htmlFor='from'>Booking From</label>
+              <input
+                type='date'
+                className='form-control'
+                onChange={handleRangeStart}
+              />
+            </div>
+            <div className='d-flex justify-content-center align-items-center me-2'>
+              <label className='mx-2' htmlFor='to'>
+                To
+              </label>
+              <input
+                type='date'
+                className='form-control'
+                onChange={handleRangeLast}
+              />
+            </div>
+            <div>
+              <button
+                className='btn btn-outline-success'
+                onClick={handleSearchRange}
+              >
+                Search
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

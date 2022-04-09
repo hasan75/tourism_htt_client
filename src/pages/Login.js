@@ -5,16 +5,8 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import avatar from './../assets/images/avater.png';
 import useContexts from '../hooks/useContexts.js';
 import { Spinner } from 'react-bootstrap';
-import { GoogleAuthProvider } from 'firebase/auth';
 const Login = () => {
-  const {
-    userLogin,
-    loading,
-    email,
-    googleRegister,
-    handleGoogleSignIn,
-    setLoading,
-  } = useContexts();
+  const { userLogin, loading, email, googleRegister } = useContexts();
   const { register, handleSubmit } = useForm();
   const history = useHistory();
   const location = useLocation();

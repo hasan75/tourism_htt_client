@@ -68,6 +68,9 @@ const Product = ({ product }) => {
               </span>
               TK
             </Card.Text>
+            <Card.Text className='text-center fw-bold '>
+              Date: <span className='text-success'> {tour_date}</span>
+            </Card.Text>
             <hr />
             <Card.Text>{desc.slice(0, 110)}...</Card.Text>
             <Card.Text className='text-center'>

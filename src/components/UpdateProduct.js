@@ -117,7 +117,7 @@ const UpdateProduct = () => {
                 <Form.Control
                   type='number'
                   defaultValue={product.discount}
-                  {...register('discount', { required: false })}
+                  {...register('discount', { required: true })}
                   placeholder='Want to Give some discount perentage?'
                 />
               </Form.Group>
@@ -212,7 +212,7 @@ const UpdateProduct = () => {
                   defaultValue={product.img}
                   id='upload'
                   type='text'
-                  {...register('img')}
+                  {...register('img', { required: true })}
                   placeholder='Enter tour package image'
                 />
               </InputGroup>
