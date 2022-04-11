@@ -149,7 +149,7 @@ const SingleProduct = () => {
                   className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}
                 >
                   Estimated Cost:{' '}
-                  <span className='fw-bold'>{service?.price}</span>
+                  <span className='fw-bold text-danger '>{service?.price}</span>
                 </span>
                 <span
                   className={`${singleServiceStyle.infoText} my-2 text-secondary mx-2`}

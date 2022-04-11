@@ -114,16 +114,25 @@ const CheckoutForm = ({ order }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <CardElement
+          className='py-3 my-2 px-2 border rounded-1'
           options={{
             style: {
               base: {
-                fontSize: '18px',
-                color: '#424770',
+                iconColor: '#1a1f37',
+                color: '#2d2d2d',
+                fontWeight: '500',
+                fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                ':-webkit-autofill': {
+                  color: '#fce883',
+                },
                 '::placeholder': {
-                  color: '#aab7c4',
+                  color: '#2d2d2d',
                 },
               },
               invalid: {
+                iconColor: '#e53d38',
                 color: '#9e2146',
               },
             },

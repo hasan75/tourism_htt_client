@@ -145,7 +145,9 @@ const PlaceOrder = () => {
                   </Row>
                   {todayDate >= eventDate ? (
                     <h2 className='text-danger fw-bold'>
-                      Sorry! This event is past. You can't book this.
+                      !! Past Event !! <br />
+                      Sorry! This event date was {product.tour_date}. You can't
+                      book this.
                     </h2>
                   ) : (
                     <input

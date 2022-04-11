@@ -395,27 +395,25 @@ const Orders = () => {
                         )}
                       </td>
                       <td>
-                        <select
+                        <span
                           className={
                             order.status === 'Pending'
-                              ? 'btn btn-danger'
+                              ? 'text-danger'
                               : order.status === 'Done'
-                              ? 'btn btn-success'
-                              : 'btn btn-info'
+                              ? 'text-success'
+                              : 'text-info'
                           }
                           defaultValue={order.status}
                           onChange={(e) =>
                             handleStatusChange(order._id, e.target.value)
                           }
                         >
-                          <option className='bg-white text-muted'>
-                            Pending
-                          </option>
-                          <option className='bg-white text-muted'>
-                            On going
-                          </option>
-                          <option className='bg-white text-muted'>Done</option>
-                        </select>
+                          {order.status === 'Pending'
+                            ? 'Pending'
+                            : order.status === 'Done'
+                            ? 'Done'
+                            : 'Processing'}
+                        </span>
                       </td>
                       <td>{order?.payment ? 'Paid' : 'Not Paid'}</td>
                     </tr>

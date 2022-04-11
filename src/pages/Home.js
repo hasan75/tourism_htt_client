@@ -83,12 +83,11 @@ const Home = () => {
       </Container>
       <Container>
         <Bounce bottom cascade>
-          <h2 className='text-center feature'>MOST POPULAR PRODUCTS</h2>
+          <h2 className='text-center feature'>MOST POPULAR Packages</h2>
           <p style={{ maxWidth: '650px' }} className='text-center mx-auto mt-3'>
             {' '}
-            A greate production of products of all kinds from various
-            manufacture sub-companies of ours from different zillas of
-            Bangladesh to serve you and your family.
+            A great qualitifull tour packages of all kinds of of ours from
+            different zillas of Bangladesh to serve you and your family.
           </p>
         </Bounce>
         {!products.length ? (

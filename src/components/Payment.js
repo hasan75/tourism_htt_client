@@ -72,6 +72,13 @@ const Payment = () => {
         </div>
       </div>
       <div className='paymentContainer container my-4 text-center'>
+        <h3 className='text-center text-success'>
+          We accept all kind of Bank Cards{' '}
+          <i class='fa-solid fa-credit-card'></i>
+        </h3>
+        <p className='text-center text-success'>
+          Please enter the card valid informations to pay.
+        </p>
         {order?.price ? (
           <Elements stripe={stripePromise}>
             <CheckoutForm order={order} />
