@@ -11,6 +11,7 @@ const TravelBlog = () => {
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);
+        console.log(data);
       })
       .catch((err) => {
         Swal.fire({

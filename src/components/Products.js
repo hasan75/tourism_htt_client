@@ -60,7 +60,7 @@ const Products = () => {
         <Container className='mb-5'>
           <Bounce top cascade>
             <h2 className='text-center text-uppercase mt-5 mb-4 feature'>
-              Popular Products
+              Popular Packages
             </h2>
             <p
               style={{ maxWidth: '650px' }}

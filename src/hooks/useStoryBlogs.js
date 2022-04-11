@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const useStoryBlogs = () => {
-  const [blogs, setBlogs] = useState();
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5001/blogs')

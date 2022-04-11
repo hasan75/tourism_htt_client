@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Product from '../components/Product.js';
 import Slider from '../components/Slider.js';
 import useProducts from '../hooks/useProducts.js';
+import useStoryBlogs from '../hooks/useStoryBlogs.js';
 import './../assets/css/home.css';
 import collection1 from './../assets/images/collection/c1.jpg';
 import collection2 from './../assets/images/collection/c2.png';
@@ -17,8 +18,10 @@ import Bounce from 'react-reveal/Bounce';
 import Testimonials from '../components/Testimonials.js';
 import VideoCOmponent from '../components/VideoCOmponent/VideoCOmponent.js';
 import TravelBlog from '../components/TravelBlog/TravelBlog.js';
+import SingleStory from '../components/SingleStory/SingleStory.js';
 const Home = () => {
   const products = useProducts();
+  const blogs = useStoryBlogs();
   return (
     <div>
       <Slider />
@@ -108,7 +111,7 @@ const Home = () => {
         <div className='text-center'>
           <Link to='/products'>
             <button className='btn btn-primary mb-5 mt-3'>
-              Explore All Products
+              Explore All Packages
             </button>
           </Link>
         </div>
@@ -116,6 +119,37 @@ const Home = () => {
       <section classsName='videoContent my-2'>
         <VideoCOmponent></VideoCOmponent>
       </section>
+      <Container mt={3}>
+        <Bounce bottom cascade>
+          <h2 className='text-center feature'>Traveller's Story</h2>
+          <p style={{ maxWidth: '650px' }} className='text-center mx-auto mt-3'>
+            {' '}
+            A great memory shouldn't be forgotten. Some of the finest writings
+            are here to entertain your soul.
+          </p>
+        </Bounce>
+        {!blogs.length ? (
+          <div className='text-center my-5 private-spinner py-5'>
+            <Spinner variant='danger' animation='border' role='status'>
+              <span className='visually-hidden'>Loading...</span>
+            </Spinner>
+            <h6>Loading...</h6>
+          </div>
+        ) : (
+          <Row>
+            {blogs?.slice(0, 2)?.map((singledata) => (
+              <SingleStory key={singledata._id} singledata={singledata} />
+            ))}
+          </Row>
+        )}
+        <div className='text-center'>
+          <Link to='/blogs'>
+            <button className='btn btn-primary mb-5 mt-3'>
+              Explore All Blogs
+            </button>
+          </Link>
+        </div>
+      </Container>
       <section classsName='blogContent my-2'>
         <TravelBlog></TravelBlog>
       </section>

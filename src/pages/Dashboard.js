@@ -14,6 +14,7 @@ import AddReview from '../components/AddReview.js';
 import Payment from '../components/Payment.js';
 import AdminRoute from '../protectedRoute/AdminRoute.js';
 import useContexts from '../hooks/useContexts.js';
+import AddBlogs from '../components/AddBlogs.js';
 
 const Dashboard = () => {
   let { path, url } = useRouteMatch();
@@ -62,7 +63,7 @@ const Dashboard = () => {
                 {user?.role === 'admin' && (
                   <li className='sideBarLink'>
                     <NavLink to={`${url}/orders`}>
-                      <i className='fas fa-list'></i> Order List
+                      <i className='fas fa-list'></i> Booking List
                     </NavLink>
                   </li>
                 )}
@@ -70,7 +71,7 @@ const Dashboard = () => {
                 {user?.role !== 'admin' && (
                   <li className='sideBarLink'>
                     <NavLink to={`${url}/myorder`}>
-                      <i className='fas fa-cart-arrow-down'></i> My order
+                      <i className='fas fa-cart-arrow-down'></i> My Booking
                     </NavLink>
                   </li>
                 )}
@@ -78,7 +79,14 @@ const Dashboard = () => {
                 {user?.role === 'admin' && (
                   <li className='sideBarLink'>
                     <NavLink to={`${url}/addProduct`}>
-                      <i className='fas fa-file-medical'></i> Add Product
+                      <i className='fas fa-file-medical'></i> Add Package
+                    </NavLink>
+                  </li>
+                )}
+                {user?.role === 'admin' && (
+                  <li className='sideBarLink'>
+                    <NavLink to={`${url}/addBlog`}>
+                      <i className='fas fa-file-medical'></i> Add Blog
                     </NavLink>
                   </li>
                 )}
@@ -92,7 +100,7 @@ const Dashboard = () => {
                 {user?.role === 'admin' && (
                   <li className='sideBarLink'>
                     <NavLink to={`${url}/manageProduct`}>
-                      <i className='fas fa-cog'></i> Manage Products
+                      <i className='fas fa-cog'></i> Manage Packages
                     </NavLink>
                   </li>
                 )}
@@ -125,6 +133,9 @@ const Dashboard = () => {
               </Route>
               <AdminRoute exact path={`${path}/addProduct`}>
                 <AddProduct></AddProduct>
+              </AdminRoute>
+              <AdminRoute exact path={`${path}/addBlog`}>
+                <AddBlogs></AddBlogs>
               </AdminRoute>
               <AdminRoute exact path={`${path}/addProduct/:id`}>
                 <UpdateProduct></UpdateProduct>

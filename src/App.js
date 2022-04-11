@@ -1,4 +1,4 @@
-import appcss from './App.module.css';
+import appStyle from './App.module.css';
 import './assets/css/main.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +16,7 @@ import ContextProvider from './contexts/ContextProvider';
 import About from './pages/About';
 import SingleProduct from './pages/SingleProduct';
 import { useEffect, useState } from 'react';
+import TravelBlog from './components/TravelBlog/TravelBlog';
 
 function App() {
   const [showBtn, setShowBtn] = useState(false);
@@ -49,6 +50,9 @@ function App() {
             <Route path='/about'>
               <About></About>
             </Route>
+            <Route path='/blogs'>
+              <TravelBlog></TravelBlog>
+            </Route>
             <PrivateRoute path='/dashboard'>
               <Dashboard></Dashboard>
             </PrivateRoute>
@@ -75,7 +79,7 @@ function App() {
         </BrowserRouter>
       </ContextProvider>
       {showBtn && (
-        <button onClick={scrollToTop} className={`${appcss.backToTop} btn`}>
+        <button onClick={scrollToTop} className='backToTop'>
           {' '}
           <i class='fa-solid fa-arrow-up fa-2x'></i>
         </button>

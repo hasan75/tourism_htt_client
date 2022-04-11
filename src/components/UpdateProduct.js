@@ -228,7 +228,7 @@ const UpdateProduct = () => {
                   type='text'
                   as='textarea'
                   {...register('desc', { required: true })}
-                  placeholder='Enter product description'
+                  placeholder='Enter package description'
                 />
               </Form.Group>
             </Row>

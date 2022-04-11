@@ -20,7 +20,7 @@ const AddProduct = () => {
     data.totalReview = 1;
     Swal.fire({
       icon: 'warning',
-      title: 'Are you sure to add this product?',
+      title: 'Are you sure to add this package?',
       showCancelButton: true,
       confirmButtonText: 'Yes',
     }).then((result) => {
@@ -203,7 +203,7 @@ const AddProduct = () => {
                   type='text'
                   as='textarea'
                   {...register('desc', { required: true })}
-                  placeholder='Enter product description'
+                  placeholder='Enter package description'
                 />
               </Form.Group>
             </Row>

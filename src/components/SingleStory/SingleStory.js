@@ -7,23 +7,23 @@ const SingleStory = (props) => {
   const data = props.singledata;
 
   return (
-    <div className={`${singleStoryStyles.card} card col-lg-6`}>
+    <div className={`${singleStoryStyles.card} card col-lg-6 m-1`}>
       <div className='card-header'>
         <div className='profile'>
           <span className='letter'>{data.storyAuthor}</span>
         </div>
         <div className='card-title-group'>
-          <h5 className='card-title'>{data.storyBlog.title}</h5>
-          <div className='card-date'>{data.storyBlog.date}</div>
+          <h5 className='card-title'>{data.title}</h5>
+          <div className='card-date'>{data.date}</div>
         </div>
       </div>
 
       <img
         className={`${singleStoryStyles.cardImage} card-image`}
-        src={data.storyBlog.image}
+        src={data.image}
         alt='Logo'
       />
-      <div className='card-text mb-2'>{data.storyBlog.description}</div>
+      <div className='card-text mb-2'>{data.description}</div>
       <div className='card-like-bar d-flex justify-content-center align-items-center'>
         <div className='likeDIv'>
           {data.isLiked ? (

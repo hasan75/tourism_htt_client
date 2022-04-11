@@ -3,10 +3,11 @@
     color: #272727;
     padding: 10px;
     border-radius: 10px;
-    border: 0px;
-    border-color: rgb(209, 161, 153);
+    border: .5px;
+    border-color: rgb(124, 121, 121);
     border-style: solid;
     transition: 200ms;
+    max-width: 520px;
     /* max-width: 380px; */
   }
   
@@ -18,8 +19,8 @@
   }
   
   .cardImage {
-    border-radius: 10px;
+    border-radius: 2px;
     margin-bottom: 10px;
-    height: 300px;
+    max-height: 300px;
     margin-top: 10px;
   }

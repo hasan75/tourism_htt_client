@@ -24,3 +24,29 @@ td,
 th {
   min-width: 170px;
 }
+
+.backToTop {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  /* font-size: 40px; */
+  background: rgb(250, 250, 250);
+  cursor: pointer;
+  color: #0dcaf0;
+  border: .7px solid rgb(114, 112, 112);
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 5px 10px #ccc;
+  padding: 10px 15px;
+}
+.backToTop:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .backToTop {
+    bottom: 65px;
+    left: 20px;
+  }
+}
