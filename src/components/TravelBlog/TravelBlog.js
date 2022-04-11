@@ -1,24 +1,42 @@
-import React from 'react';
-import useStoryBlog from '../../hooks/useStoryBlog';
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import SingleStory from '../SingleStory/SingleStory';
-import "./TravelBlog.css";
+import travelStyles from './TravelBlog.module.css';
 
 const TravelBlog = () => {
-    const [data] = useStoryBlog();
-    return (
-        <div>
-            <h1 className="text-center pt-4" >Traveller's Story</h1>
-            <div className="container p-5 d-lg-flex flex-column ">
-                <div className="row">
-                    {
-                        data.map(singledata => <SingleStory key={singledata._id} singledata={singledata}></SingleStory>)
-                    }
-                </div>
+  const [blogs, setBlogs] = useState([]);
 
-            </div>
-            
+  useEffect(() => {
+    fetch('http://localhost:5001/blogs')
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogs(data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: 'Please, try again',
+        });
+      });
+  }, []);
+
+  return (
+    <div>
+      <h1 className='text-center pt-4'>Traveller's Story</h1>
+      <div className='container p-5 d-lg-flex flex-column '>
+        <div className='row'>
+          {blogs.map((singledata) => (
+            <SingleStory
+              key={singledata._id}
+              singledata={singledata}
+            ></SingleStory>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default TravelBlog;

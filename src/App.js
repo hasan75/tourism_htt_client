@@ -1,4 +1,4 @@
-import './App.css';
+import appcss from './App.module.css';
 import './assets/css/main.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,8 +15,25 @@ import PageNotFound from './pages/PageNotFound';
 import ContextProvider from './contexts/ContextProvider';
 import About from './pages/About';
 import SingleProduct from './pages/SingleProduct';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [showBtn, setShowBtn] = useState(false);
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        setShowBtn(true);
+      } else {
+        setShowBtn(false);
+      }
+    });
+  }, []);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
   return (
     <div className='App'>
       <ContextProvider>
@@ -57,6 +74,12 @@ function App() {
           <Footer></Footer>
         </BrowserRouter>
       </ContextProvider>
+      {showBtn && (
+        <button onClick={scrollToTop} className={`${appcss.backToTop} btn`}>
+          {' '}
+          <i class='fa-solid fa-arrow-up fa-2x'></i>
+        </button>
+      )}
     </div>
   );
 }

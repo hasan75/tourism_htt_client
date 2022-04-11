@@ -16,6 +16,7 @@ import collection8 from './../assets/images/collection/c8.jpg';
 import Bounce from 'react-reveal/Bounce';
 import Testimonials from '../components/Testimonials.js';
 import VideoCOmponent from '../components/VideoCOmponent/VideoCOmponent.js';
+import TravelBlog from '../components/TravelBlog/TravelBlog.js';
 const Home = () => {
   const products = useProducts();
   return (
@@ -114,6 +115,9 @@ const Home = () => {
       </Container>
       <section classsName='videoContent my-2'>
         <VideoCOmponent></VideoCOmponent>
+      </section>
+      <section classsName='blogContent my-2'>
+        <TravelBlog></TravelBlog>
       </section>
       <Testimonials />
     </div>
