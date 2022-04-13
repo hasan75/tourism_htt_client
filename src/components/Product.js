@@ -88,7 +88,7 @@ const Product = ({ product }) => {
               <button className='btn mt-2 btn-primary me-5'>See Details</button>
             </Link>
             <Link to={`/placeorder/${_id}`}>
-              <button className='btn mt-2 btn-primary'>Buy Now</button>
+              <button className='btn mt-2 btn-primary'>Book Now</button>
             </Link>
           </Card.Body>
         </Card>

@@ -150,9 +150,6 @@ const Home = () => {
           </Link>
         </div>
       </Container>
-      <section classsName='blogContent my-2'>
-        <TravelBlog></TravelBlog>
-      </section>
       <Testimonials />
     </div>
   );

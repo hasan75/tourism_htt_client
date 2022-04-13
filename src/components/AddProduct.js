@@ -56,7 +56,7 @@ const AddProduct = () => {
   return (
     <>
       <section className='add-service'>
-        <h3 className='text-center mb-3 fw-bold'>Add a new product</h3>
+        <h3 className='text-center mb-3 fw-bold'>Add a new Package</h3>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <div
             className='pb-5 mx-auto  bg-white form-main'

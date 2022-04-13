@@ -6,6 +6,13 @@ import singleStoryStyles from './SingleStory.module.css';
 const SingleStory = (props) => {
   const data = props.singledata;
 
+  const convertedDateFormat = new Date(data.date).toLocaleDateString('en-us', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
   return (
     <div className={`${singleStoryStyles.card} card col-lg-6 m-1`}>
       <div className='card-header'>
@@ -14,7 +21,7 @@ const SingleStory = (props) => {
         </div>
         <div className='card-title-group'>
           <h5 className='card-title'>{data.title}</h5>
-          <div className='card-date'>{data.date}</div>
+          <div className='card-date'>{convertedDateFormat}</div>
         </div>
       </div>
 
