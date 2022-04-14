@@ -23,6 +23,9 @@ const Product = ({ product }) => {
   } = product;
 
   // const priceAfterDiscount = parseInt(price);
+  const discountedPrice =
+    parseInt(price) - parseInt(price) * (parseInt(discount) / 100);
+  //console.log();
 
   return (
     <Col className='my-3 text-center' sm={12} md={6} lg={4}>
@@ -56,16 +59,23 @@ const Product = ({ product }) => {
               <i className='fas event-icon fa-flag-checkered text-success'></i>
             </Card.Text>
             <Card.Text className='text-center fw-bold '>
-              Budget:{' '}
-              <span className='text-decoration-line-through textDecorationColor'>
+              Budget:
+              <span
+                className={
+                  !isNaN(discountedPrice)
+                    ? [
+                        'text-decoration-line-through',
+                        'textDecorationColor',
+                      ].join(' ')
+                    : 'textDecorationColor'
+                }
+              >
                 {' '}
                 {price}.00
-              </span>
-              <span className='text-success'>
-                {' '}
-                {parseInt(price) -
-                  parseInt(price) * (parseInt(discount) / 100)}{' '}
-              </span>
+              </span>{' '}
+              {!isNaN(discountedPrice) && (
+                <span className='text-success'>{discountedPrice} </span>
+              )}
               TK
             </Card.Text>
             <Card.Text className='text-center fw-bold '>
