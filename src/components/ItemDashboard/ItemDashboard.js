@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ItemDashboard.module.css';
 import introImg from '../../assets/images/introDash.png';
 import useProducts from '../../hooks/useProducts';
 import useStoryBlogs from '../../hooks/useStoryBlogs';
 import useBookings from '../../hooks/useBookings';
+import useUsers from '../../hooks/useUsers';
 
-const ItemDashboard = ({ displayName, email }) => {
-  const [profileBooking, setProfileBookings] = useState([]);
+const ItemDashboard = ({ displayName, email, role }) => {
   const products = useProducts();
   const blogs = useStoryBlogs();
   const bookings = useBookings();
+  const users = useUsers();
+
+  //   personalBookings
+  const personalBookings = bookings.filter(
+    (personalBook) => personalBook.email === email
+  );
+
+  //   to find total bookin amount
+  let totalPrice = bookings.reduce((acc, booking) => {
+    return (
+      acc +
+      Math.round(
+        parseInt(booking?.price) -
+          parseInt(booking?.price) * (parseInt(booking?.discount) / 100)
+      )
+    );
+  }, 0);
+
+  //to find total personal booking amount
+  let totalPersonalPrice = personalBookings.reduce((acc, personalBooking) => {
+    return (
+      acc +
+      Math.round(
+        parseInt(personalBooking?.price) -
+          parseInt(personalBooking?.price) *
+            (parseInt(personalBooking?.discount) / 100)
+      )
+    );
+  }, 0);
 
   return (
     <div>
@@ -45,8 +74,8 @@ const ItemDashboard = ({ displayName, email }) => {
             </div>
             <div className=' d-flex justify-content-end'>
               <div className='text-center text-secondary m-2'>
-                <span>My Services</span>
-                <h5>11</h5>
+                <span>Total Packages</span>
+                <h5>{products.length}</h5>
               </div>
             </div>
           </div>
@@ -62,8 +91,8 @@ const ItemDashboard = ({ displayName, email }) => {
             </div>
             <div className='d-flex justify-content-end'>
               <div className='text-center text-secondary m-2'>
-                <span>Orders</span>
-                <h5>4</h5>
+                <span>Bookings</span>
+                <h5>{role ? bookings.length : personalBookings.length}</h5>
               </div>
             </div>
           </div>
@@ -79,8 +108,8 @@ const ItemDashboard = ({ displayName, email }) => {
             </div>
             <div className='d-flex justify-content-end'>
               <div className='text-center text-secondary m-2'>
-                <span>Income</span>
-                <h5>৳ 5000</h5>
+                <span>Cost</span>
+                <h5>৳ {role ? totalPrice : totalPersonalPrice}</h5>
               </div>
             </div>
           </div>
@@ -96,9 +125,10 @@ const ItemDashboard = ({ displayName, email }) => {
             </div>
             <div className='d-flex justify-content-end'>
               <div className='text-center text-secondary m-2'>
-                <span>Liked By</span>
+                <span>Stories</span>
                 <h5>
-                  <i className='fa-regular fa-user text-secondary fa-xs'></i> 20
+                  <i className='fa-regular fa-user text-secondary fa-xs'></i>{' '}
+                  {blogs.length}
                 </h5>
               </div>
             </div>
