@@ -6,11 +6,15 @@ import useStoryBlogs from '../../hooks/useStoryBlogs';
 import useBookings from '../../hooks/useBookings';
 import useUsers from '../../hooks/useUsers';
 
-const ItemDashboard = ({ displayName, email, role }) => {
+const ItemDashboard = ({ displayName, email }) => {
   const products = useProducts();
   const blogs = useStoryBlogs();
   const bookings = useBookings();
   const users = useUsers();
+
+  //admin users
+  const adminUser = users.find((admin) => admin.email === email);
+  const role = adminUser?.role || undefined;
 
   //   personalBookings
   const personalBookings = bookings.filter(
