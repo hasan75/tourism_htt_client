@@ -5,6 +5,8 @@ import { useHistory, useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
 import useContexts from '../hooks/useContexts.js';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
+import placeOrderStyle from '../assets/css/placeOrder.module.css';
 
 const PlaceOrder = () => {
   let theOrderDate = new Date().toLocaleDateString();
@@ -14,6 +16,24 @@ const PlaceOrder = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const { displayName, email } = useContexts();
+  const [orders, setOrders] = useState([]);
+
+  // to see the orders by the users
+  useEffect(() => {
+    fetch(`http://localhost:5001/orders?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOrders(data);
+      })
+      .catch((error) => toast.error(error.message));
+  }, [email]);
+
+  const orderMatched = orders?.find(
+    (order) => product.title === order.title && email === order.email
+  );
+  console.log(orderMatched);
+
+  //to place order
   useEffect(() => {
     fetch(`http://localhost:5001/placeorder/${id}`)
       .then((res) => res.json())
@@ -25,6 +45,7 @@ const PlaceOrder = () => {
   const eventDate = new Date(product.tour_date);
 
   const { register, handleSubmit, reset } = useForm();
+
   const onSubmit = (data) => {
     data.orderDate = theOrderDate;
     data.orderTime = theOrderTime;
@@ -143,7 +164,7 @@ const PlaceOrder = () => {
                       />
                     </Col>
                   </Row>
-                  {todayDate >= eventDate ? (
+                  {/* {todayDate >= eventDate ? (
                     <h2 className='text-danger fw-bold'>
                       !! Past Event !! <br />
                       Sorry! This event date was {product.tour_date}. You can't
@@ -151,7 +172,43 @@ const PlaceOrder = () => {
                     </h2>
                   ) : (
                     <input
-                      value='Order Now'
+                      value='Book Now'
+                      className='btn btn-primary'
+                      type='submit'
+                    />
+                  )}
+                  {orderMatched ? (
+                    <h2 className='text-danger fw-bold'>
+                      You have already booked the package. Your Booking Date was{' '}
+                      {orderMatched.orderDate} at {orderMatched.orderTime}.
+                    </h2>
+                  ) : (
+                    <input
+                      value='Book Now'
+                      className='btn btn-primary'
+                      type='submit'
+                    />
+                  )} */}
+
+                  {todayDate >= eventDate ? (
+                    <div className={`${placeOrderStyle.alertDiv} p-2 rounded`}>
+                      <h2 className='text-danger fw-bold bg'>
+                        !! Past Event !! <br />
+                        Sorry! This event date was {product.tour_date}. You
+                        can't book this.
+                      </h2>
+                    </div>
+                  ) : orderMatched ? (
+                    <div className={`${placeOrderStyle.alertDiv} p-2 rounded`}>
+                      <h2 className='text-danger fw-bold alertDiv'>
+                        You have already booked the package. Your Booking Date
+                        was {orderMatched.orderDate} at {orderMatched.orderTime}
+                        .
+                      </h2>
+                    </div>
+                  ) : (
+                    <input
+                      value='Book Now'
                       className='btn btn-primary'
                       type='submit'
                     />
