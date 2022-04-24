@@ -89,6 +89,15 @@ const Payment = () => {
           </Spinner>
         )}
       </div>
+
+      <div className={`${paymentStyle.stripeCards}`}>
+        <p className='mb-2'>Stripe Demo Cards Numbers</p>
+        <ul>
+          <li>4242424242424242</li>
+          <li>4000056655665556</li>
+          <li>5555555555554444</li>
+        </ul>
+      </div>
     </section>
   );
 };

@@ -1,10 +1,10 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useEffect, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Spinner, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
 const CheckoutForm = ({ order }) => {
-  const { price, name, email, discount, _id } = order;
+  const { price, name, email, discount, _id, title } = order;
   const thePrice = Math.round(
     parseInt(price) - parseInt(price) * (parseInt(discount) / 100)
   );
@@ -143,6 +143,8 @@ const CheckoutForm = ({ order }) => {
           <Spinner variant='danger' animation='border' role='status'>
             <span className='visually-hidden'>Loading...</span>
           </Spinner>
+        ) : order.payment ? (
+          <span className='text-success fw-bold'>Payment Completed</span>
         ) : (
           <button
             type='submit'

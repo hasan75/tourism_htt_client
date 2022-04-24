@@ -7,6 +7,7 @@ import myordersStyle from '../assets/css/myorder.module.css';
 import ReactToPdf from 'react-to-pdf';
 import ReactToPrint from 'react-to-print';
 import { Link } from 'react-router-dom';
+import httLogo from '../assets/images/logo.png';
 
 const Orders = () => {
   const { email } = useContexts();
@@ -16,6 +17,9 @@ const Orders = () => {
 
   // for printing pdf
   const componentRef = useRef();
+
+  //for printing invoice
+  const invoiceRef = useRef();
 
   useEffect(() => {
     fetch(`http://localhost:5001/orders?email=${email}`)
@@ -63,18 +67,6 @@ const Orders = () => {
     setDisplayOrders(matchedOrders);
   };
 
-  // useRef for pdf
-  // const pdfRef = useRef();
-  // const options = {
-  //   orientation: 'landscape',
-  //   unit: 'in',
-  //   format: [12, 12],
-  // };
-
-  // const handleChangeDate = (e) => {
-  //   console.log(e.target.value);
-  // };
-
   return (
     <div className='px-2  mx-md-2 bg-white' style={{ borderRadius: '15px' }}>
       <h3 className='text-center fw-bold mb-4'>My Booked Packages</h3>
@@ -87,25 +79,6 @@ const Orders = () => {
           onChange={handleMyOrderSearch}
         />
       </div>
-
-      {/* <input type='date' onChange={handleChangeDate} /> */}
-      {/* <ReactToPdf
-        targetRef={pdfRef}
-        filename='htt.pdf'
-        options={options}
-        x={0.5}
-        y={0.5}
-        // scale={0.8}
-      >
-        {({ toPdf }) => (
-          <button className='btn btn-warning mb-3' onClick={toPdf}>
-            <i className='fa-solid fa-print'></i>
-          </button>
-        )}
-      </ReactToPdf> */}
-      {/* <button className='btn btn-warning mb-3' onClick={handlePrint}>
-        <i className='fa-solid fa-print'></i>
-      </button> */}
 
       {/* print trigger button  */}
       <ReactToPrint
@@ -141,11 +114,11 @@ const Orders = () => {
               <tr>
                 <th>Image</th>
                 <th>Package</th>
-                <th>Description</th>
                 <th>Order Date</th>
                 <th>Cost</th>
                 <th>Status</th>
                 <th>Payment Status</th>
+                <th>Invoice</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -157,7 +130,6 @@ const Orders = () => {
                       <img width='100px' src={order.img} alt='' />
                     </td>
                     <td>{order.title}</td>
-                    <td>{order.desc}</td>
                     <td>{order?.orderDate}</td>
                     <td>
                       {Math.round(
@@ -189,6 +161,183 @@ const Orders = () => {
                           <button className='btn btn-primary'>Pay</button>
                         </Link>
                       )}
+                    </td>
+                    <td>
+                      {order?.payment ? (
+                        <ReactToPrint
+                          trigger={() => (
+                            <button className='btn btn-info mb-3'>
+                              {' '}
+                              <i className='fa-solid fa-print'></i>{' '}
+                              <span>Invoice</span>
+                            </button>
+                          )}
+                          content={() => invoiceRef.current}
+                        />
+                      ) : (
+                        <span>Not paid</span>
+                      )}
+
+                      {/* the invisible table  */}
+                      <div style={{ display: 'none' }}>
+                        <Table ref={invoiceRef} responsive>
+                          <thead className='bg-light'>
+                            <tr>
+                              <th colSpan={4} className='text-center fw-bold'>
+                                <img
+                                  style={{
+                                    height: '60px',
+                                    display: 'block',
+                                    marginLeft: '20px',
+                                  }}
+                                  src={httLogo}
+                                  alt='the Logo'
+                                ></img>
+                                <span className='text-danger'>
+                                  {' '}
+                                  Hit The Trail{' '}
+                                </span>{' '}
+                                <br />
+                                The finest Tour Management Group of BD <br />
+                                <span className='text-primary'>
+                                  Date: {new Date().toDateString()}
+                                </span>
+                              </th>
+                            </tr>
+                            <tr>
+                              <th
+                                colSpan={4}
+                                className='d-flex justify-content-center'
+                              >
+                                <span className='text-info fw-bold'>
+                                  Invoice for{' '}
+                                  <span className='text-danger'>
+                                    {order.title}
+                                  </span>
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold'>
+                                  Invoice to: {order.name}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold'>
+                                  Email: {order.email}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold'>
+                                  Address: {order.address}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold'>
+                                  Phone: {order.phone}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold'>
+                                  Order Date: {order.orderDate}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold'>
+                                  Package Cost: {order.price} Taka
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold text-warning'>
+                                  Discount: {order.discount} %
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold text-success'>
+                                  Final Cost :{' '}
+                                  {Math.round(
+                                    parseInt(order?.price) -
+                                      parseInt(order?.price) *
+                                        (parseInt(order?.discount) / 100)
+                                  )}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold text-warning'>
+                                  Payment Method: Stripe Card
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold text-warning'>
+                                  Last Four Digit of the Card:{' '}
+                                  {order?.payment?.last4}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                className='d-flex justify-content-end me-2'
+                              >
+                                <span className='fw-bold text-danger'>
+                                  Payment Amount: {order?.payment?.amount / 100}
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </div>
                     </td>
                     <td>
                       <Button

@@ -213,21 +213,6 @@ const Orders = () => {
         </div>
       </div>
 
-      {/* <ReactToPdf
-        targetRef={pdfRef}
-        filename='htt.pdf'
-        options={options}
-        x={0.5}
-        y={0.5}
-        // scale={0.8}
-      >
-        {({ toPdf }) => (
-          <button className='btn btn-warning mb-3' onClick={toPdf}>
-            <i className='fa-solid fa-print'></i>
-          </button>
-        )}
-      </ReactToPdf> */}
-
       {/* //react to print button   */}
       <ReactToPrint
         trigger={() => (

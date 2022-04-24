@@ -77,6 +77,8 @@ const PlaceOrder = () => {
       parseInt(product?.price) * (parseInt(product?.discount) / 100)
   );
 
+  // function to add a invoice
+
   return (
     <>
       {!product.title ? (
@@ -211,6 +213,9 @@ const PlaceOrder = () => {
                       value='Book Now'
                       className='btn btn-primary'
                       type='submit'
+                      data-toggle='tooltip'
+                      data-placement='top'
+                      title='Invoice Will be downloaded after your Booking'
                     />
                   )}
                 </form>

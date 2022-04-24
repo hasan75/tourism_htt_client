@@ -83,7 +83,10 @@ const Dashboard = () => {
                     </NavLink>
                   </li>
                 )}
-                {user?.role === 'admin' && (
+
+                {/* blog can be added by user and admin both  */}
+
+                {(user?.role === 'admin' || !user.role) && (
                   <li className='sideBarLink'>
                     <NavLink to={`${url}/addBlog`}>
                       <i className='fas fa-file-medical'></i> Add Blog
@@ -134,6 +137,9 @@ const Dashboard = () => {
               <AdminRoute exact path={`${path}/addProduct`}>
                 <AddProduct></AddProduct>
               </AdminRoute>
+              <Route exact path={`${path}/addBlog`}>
+                <AddBlogs></AddBlogs>
+              </Route>
               <AdminRoute exact path={`${path}/addBlog`}>
                 <AddBlogs></AddBlogs>
               </AdminRoute>
