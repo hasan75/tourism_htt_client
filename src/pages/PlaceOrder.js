@@ -215,7 +215,7 @@ const PlaceOrder = () => {
                       type='submit'
                       data-toggle='tooltip'
                       data-placement='top'
-                      title='Invoice Will be downloaded after your Booking'
+                      title='Invoice Will be available after payment'
                     />
                   )}
                 </form>

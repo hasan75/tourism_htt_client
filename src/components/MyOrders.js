@@ -216,6 +216,17 @@ const Orders = () => {
                                   </span>
                                 </span>
                               </th>
+                              <th
+                                colSpan={4}
+                                className='d-flex justify-content-center m-2'
+                              >
+                                <span className='text-info fw-bold'>
+                                  Invoice Number{' '}
+                                  <span className='text-danger'>
+                                    {order._id}
+                                  </span>
+                                </span>
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
