@@ -7,7 +7,7 @@
     border-color: rgb(124, 121, 121);
     border-style: solid;
     transition: 200ms;
-    max-width: 520px;
+    /* max-width: 520px; */
     /* max-width: 380px; */
     min-height: 715px;
   }
