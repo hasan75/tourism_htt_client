@@ -14,34 +14,36 @@ const SingleStory = (props) => {
   });
 
   return (
-    <div className={`${singleStoryStyles.card} card col-lg-6 m-1`}>
-      <div className='card-header'>
-        <div className='profile'>
-          <span className='letter'>{data.storyAuthor}</span>
-        </div>
-        <div className='card-title-group'>
-          <h5 className='card-title'>{data.title}</h5>
-          <div className='card-date'>{convertedDateFormat}</div>
-        </div>
-      </div>
-
-      <img
-        className={`${singleStoryStyles.cardImage} card-image`}
-        src={data.image}
-        alt='Logo'
-      />
-      <div className='card-text mb-2'>{data.description}</div>
-      <div className='card-like-bar d-flex justify-content-center align-items-center'>
-        <div className='likeDIv'>
-          {data.isLiked ? (
-            <img className='card-like-icon' src={heartFill} alt='Logo' />
-          ) : (
-            <img className='card-like-icon' src={heartOutline} alt='Logo' />
-          )}
+    <div className='col-lg-6'>
+      <div className={`${singleStoryStyles.card} card  m-1`}>
+        <div className='card-header'>
+          <div className='profile'>
+            <span className='letter'>{data.storyAuthor}</span>
+          </div>
+          <div className='card-title-group'>
+            <h5 className='card-title'>{data.title}</h5>
+            <div className='card-date'>{convertedDateFormat}</div>
+          </div>
         </div>
 
-        <div className='like-text ms-2'>
-          <b>{data.like}</b> peoples love this.
+        <img
+          className={`${singleStoryStyles.cardImage} card-image`}
+          src={data.image}
+          alt='Logo'
+        />
+        <div className='card-text mb-2'>{data.description}</div>
+        <div className='card-like-bar d-flex justify-content-center align-items-center'>
+          <div className='likeDIv'>
+            {data.isLiked ? (
+              <img className='card-like-icon' src={heartFill} alt='Logo' />
+            ) : (
+              <img className='card-like-icon' src={heartOutline} alt='Logo' />
+            )}
+          </div>
+
+          <div className='like-text ms-2'>
+            <b>{data.like}</b> peoples love this.
+          </div>
         </div>
       </div>
     </div>

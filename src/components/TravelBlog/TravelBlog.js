@@ -26,7 +26,7 @@ const TravelBlog = () => {
   return (
     <div>
       <h1 className='text-center pt-4'>Traveller's Story</h1>
-      <div className='container p-5 d-lg-flex flex-column '>
+      <div className='container my-2'>
         <div className='row d-flex justify-content-between'>
           {blogs.map((singledata) => (
             <SingleStory

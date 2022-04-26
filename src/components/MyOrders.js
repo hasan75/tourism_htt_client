@@ -114,7 +114,7 @@ const Orders = () => {
               <tr>
                 <th>Image</th>
                 <th>Package</th>
-                <th>Order Date</th>
+                <th>Booking Date</th>
                 <th>Cost</th>
                 <th>Status</th>
                 <th>Payment Status</th>
@@ -382,7 +382,7 @@ const Orders = () => {
                   <th>Image</th>
                   <th>Package</th>
                   <th>Description</th>
-                  <th>Order Date</th>
+                  <th>Booking Date</th>
                   <th>Confirm Status</th>
                   <th>Payment Status</th>
                 </tr>
